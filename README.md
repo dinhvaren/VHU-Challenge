@@ -33,8 +33,8 @@ Each challenge simulates realistic attack-defense scenarios, allowing participan
 
 ### 🔸 Clone Repository
 ```bash
-git clone https://github.com/dinhvaren/VHUChallenge.git
-cd VHUChallenge
+git clone https://github.com/dinhvaren/VHU-Challenge.git
+cd VHU-Challenge
 ````
 
 ### 🔸 Install Dependencies
