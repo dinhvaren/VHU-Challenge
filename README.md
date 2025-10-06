@@ -69,8 +69,6 @@ Access via: [http://localhost:3000](http://localhost:3000)
 * **Hackerboard:** Dynamic chart leaderboard (Chart.js)
 * **Challenges:** Realistic exploitation labs with flag submission
 
-![CTF Banner Preview](./public/images/bg--world.png)
-
 ## 🧠 Philosophy
 
 > “The quieter you become, the more you are able to hear.”
