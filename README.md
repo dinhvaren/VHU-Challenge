@@ -1,51 +1,53 @@
 # 🧠 VHU Challenge 2025
 
-**VHU Challenge** is an annual cybersecurity competition organized by **Văn Hiến University (VHU)** — a playground for students passionate about **Information Security**, **CTF (Capture The Flag)**, and **ethical hacking**.  
+**VHU Challenge** là cuộc thi **an ninh mạng thường niên** do **Trường Đại học Văn Hiến (VHU)** tổ chức — sân chơi dành cho sinh viên đam mê **Information Security**, **CTF (Capture The Flag)** và **Ethical Hacking**.
 
-> 💬 *Hack. Learn. Conquer.*  
-> Push your limits. Break systems — not rules.
+> 💬 *Hack. Learn. Conquer.*
+> Thử thách giới hạn của bạn. Phá hệ thống — không phá luật.
 
-## 🚩 Overview
+## 🚩 Tổng quan
 
-VHU Challenge is designed to help students explore real-world vulnerabilities through hands-on web, crypto, forensic, and network challenges.  
-Each challenge simulates realistic attack-defense scenarios, allowing participants to **analyze, exploit, and learn**.
+**VHU Challenge** được thiết kế nhằm giúp sinh viên tiếp cận các lỗ hổng bảo mật thực tế thông qua những thử thách thuộc các mảng **Web**, **Crypto**, **Forensic**, và **Network**.
+Mỗi thử thách mô phỏng tình huống **tấn công – phòng thủ thực tế**, cho phép người chơi **phân tích, khai thác và học hỏi** từ chính quá trình thực hành.
 
-### 💡 Key Features
-- 🕵️‍♂️ Multiple challenge categories (Web, Crypto, Forensics, OSINT, Misc)
-- 💻 Live scoreboard & dynamic ranking system
-- 🔐 User registration & team-based participation
-- ⚙️ Built using Node.js, Express, MongoDB, and Handlebars (HBS)
-- 🎨 Neon-glow cyberpunk UI inspired by hacker aesthetics
-- ☁️ Easy deployment via Docker Compose or local environment
+### 💡 Điểm nổi bật
 
-## 🧩 Tech Stack
+* 🕵️‍♂️ Nhiều thể loại thử thách (Web, Crypto, Forensics, OSINT, Misc)
+* 💻 Bảng xếp hạng **real-time**, cập nhật thứ hạng động
+* 🔐 Hệ thống **đăng ký người dùng / đội nhóm**
+* ⚙️ Xây dựng bằng **Node.js, Express, MongoDB và Handlebars (HBS)**
+* 🎨 Giao diện **Cyberpunk – Neon Glow**, đậm chất hacker
+* ☁️ Dễ dàng triển khai với **Docker Compose** hoặc **Local Environment**
 
-| Layer | Technology |
-|-------|-------------|
-| **Frontend** | HTML5, Bootstrap 4, Handlebars (HBS), Chart.js |
-| **Backend** | Node.js (Express.js) |
-| **Database** | MongoDB (Mongoose ORM) |
-| **Deployment** | Docker, Nginx Reverse Proxy, Certbot SSL |
-| **Styling** | Neon Glow CSS, Google Fonts, Hack Font |
-| **Version Control** | Git + GitHub |
+## 🧩 Công nghệ sử dụng
 
-## ⚙️ Installation
+| Layer                | Công nghệ                                      |
+| -------------------- | ---------------------------------------------- |
+| **Frontend**         | HTML5, Bootstrap 4, Handlebars (HBS), Chart.js |
+| **Backend**          | Node.js (Express.js)                           |
+| **Database**         | MongoDB (Mongoose ORM)                         |
+| **Triển khai**       | Docker, Nginx Reverse Proxy, Certbot SSL       |
+| **Giao diện**        | Neon Glow CSS, Google Fonts, Hack Font         |
+| **Quản lý mã nguồn** | Git + GitHub                                   |
 
-### 🔸 Clone Repository
+## ⚙️ Cài đặt & Khởi chạy
+
+### 🔸 Bước 1: Clone repository
+
 ```bash
 git clone https://github.com/dinhvaren/VHU-Challenge.git
 cd VHU-Challenge
-````
+```
 
-### 🔸 Install Dependencies
+### 🔸 Bước 2: Cài đặt dependencies
 
 ```bash
 npm install
 ```
 
-### 🔸 Setup Environment
+### 🔸 Bước 3: Tạo file `.env`
 
-Create a `.env` file in the project root:
+Tạo file `.env` ở thư mục gốc của dự án và thêm các biến sau:
 
 ```bash
 PORT=3000
@@ -54,45 +56,45 @@ JWT_SECRET=yourSecretKey
 SESSION_SECRET=yourSessionKey
 ```
 
-### 🔸 Run Application
+### 🔸 Bước 4: Chạy ứng dụng
 
 ```bash
 npm start
 ```
 
-Access via: [http://localhost:3000](http://localhost:3000)
+Sau đó truy cập tại: [http://localhost:3000](http://localhost:3000)
 
-## 🎮 Gameplay Preview
+## 🎮 Giao diện & Chức năng
 
-* **Home Page:** Animated glitch effect with “VHU Challenge” banner
-* **Register/Login:** Cyberpunk-style UI with glowing checkboxes & hacker font
-* **Hackerboard:** Dynamic chart leaderboard (Chart.js)
-* **Challenges:** Realistic exploitation labs with flag submission
+* **Trang chủ:** Hiệu ứng glitch động cùng banner “VHU Challenge”
+* **Đăng ký / Đăng nhập:** Giao diện neon cyberpunk, checkbox phát sáng
+* **Hackerboard:** Bảng xếp hạng động, hiển thị thống kê bằng Chart.js
+* **Challenges:** Bộ thử thách mô phỏng khai thác lỗ hổng thực tế, có flag submission
 
-## 🧠 Philosophy
+## 🧠 Triết lý thiết kế
 
-> “The quieter you become, the more you are able to hear.”
-> — Ancient Hacker Proverb
+> “Càng im lặng, bạn càng nghe được nhiều hơn.”
+> — *Ancient Hacker Proverb*
 
-VHU Challenge is more than a competition — it’s a **learning environment** where students become defenders, attackers, and thinkers in the cyber world.
+**VHU Challenge** không chỉ là một cuộc thi, mà là **môi trường học tập thực chiến**, nơi sinh viên trở thành **người tấn công, người phòng thủ và người tư duy bảo mật**.
 
-## 🧑‍💻 Contributors
+## 🧑‍💻 Người thực hiện
 
-| Name                                   | Role                     | Contact                                 |
-| -------------------------------------- | ------------------------ | --------------------------------------- |
-| **Lương Nguyễn Ngọc Đình (d1nhvar3n)** | Founder / Developer      | [GitHub](https://github.com/dinhvaren)  |
+| Họ tên                                 | Vai trò             | Liên hệ                                |
+| -------------------------------------- | ------------------- | -------------------------------------- |
+| **Lương Nguyễn Ngọc Đình (d1nhvar3n)** | Founder / Developer | [GitHub](https://github.com/dinhvaren) |
 
-## 📜 License
 
-This project is created for **educational and ethical purposes** only.
-All challenge content belongs to **VHU Cybersecurity Lab**.
-Unauthorized use in production environments is prohibited.
+## 📜 Giấy phép sử dụng
 
-### 💬 Connect
+Dự án này được tạo ra **vì mục đích học tập và nghiên cứu đạo đức**.
+Toàn bộ nội dung challenge thuộc sở hữu của **VHU Cybersecurity Lab**.
+**Nghiêm cấm** triển khai trên môi trường sản xuất hoặc mục đích trái phép.
+
+### 💬 Kết nối
 
 * 🌐 Portfolio: [https://d1nhvar3n.id.vn](https://d1nhvar3n.id.vn)
 * 🧑‍💻 GitHub: [https://github.com/dinhvaren](https://github.com/dinhvaren)
-* 📧 Contact: [dinhvaren@vhu.edu.vn](mailto:dinhvaren@vhu.edu.vn)
+* 📧 Email: [dinhvaren@vhu.edu.vn](mailto:dinhvaren@vhu.edu.vn)
 
-> ⚡ *“Train like you fight — hack like you learn.”*
-
+> ⚡ *“Hãy luyện tập như đang chiến đấu — hack như đang học.”*
