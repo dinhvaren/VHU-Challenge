@@ -81,7 +81,6 @@ VHU Challenge is more than a competition — it’s a **learning environment** w
 | Name                                   | Role                     | Contact                                 |
 | -------------------------------------- | ------------------------ | --------------------------------------- |
 | **Lương Nguyễn Ngọc Đình (d1nhvar3n)** | Founder / Developer      | [GitHub](https://github.com/dinhvaren)  |
-| **VHU InfoSec Lab**                    | Support & Infrastructure | [VHU CTF Portal](https://vhu-ctf.io.vn) |
 
 ## 📜 License
 
