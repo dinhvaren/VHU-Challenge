@@ -88,7 +88,7 @@ Sau đó truy cập tại: [http://localhost:3000](http://localhost:3000)
 ## 📜 Giấy phép sử dụng
 
 Dự án này được tạo ra **vì mục đích học tập và nghiên cứu đạo đức**.
-Toàn bộ nội dung challenge thuộc sở hữu của **VHU Cybersecurity Lab**.
+Toàn bộ nội dung challenge thuộc sở hữu của **VHU InfoSec Lab**.
 **Nghiêm cấm** triển khai trên môi trường sản xuất hoặc mục đích trái phép.
 
 ### 💬 Kết nối
