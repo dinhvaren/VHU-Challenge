@@ -1,0 +1,36 @@
+{
+  "name": "vhuinfoseclab",
+  "version": "1.0.0",
+  "description": "**VHU Challenge** là cuộc thi **an ninh mạng thường niên** do **Trường Đại học Văn Hiến (VHU)** tổ chức — sân chơi dành cho sinh viên đam mê **Information Security**, **CTF (Capture The Flag)** và **Ethical Hacking**.",
+  "homepage": "https://github.com/dinhvaren/VhuInfoSecLab#readme",
+  "bugs": {
+    "url": "https://github.com/dinhvaren/VhuInfoSecLab/issues"
+  },
+  "license": "MIT",
+  "author": "dinhvaren",
+  "type": "commonjs",
+  "main": "index.js",
+  "scripts": {
+    "start": "nodemon --inspect src/index.js",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "dependencies": {
+    "bcryptjs": "^3.0.2",
+    "body-parser": "^2.2.0",
+    "cookie-parser": "^1.4.7",
+    "dotenv": "^17.2.3",
+    "express": "^5.1.0",
+    "express-handlebars": "^8.0.1",
+    "express-session": "^1.18.2",
+    "jquery": "^3.7.1",
+    "jsonwebtoken": "^9.0.2",
+    "method-override": "^3.0.0",
+    "mongoose": "^8.19.1",
+    "mongoose-delete": "^1.0.2",
+    "mongoose-sequence": "^6.0.1",
+    "mongoose-slug-generator": "^1.0.4",
+    "node": "^24.9.0",
+    "path": "^0.12.7",
+    "slugify": "^1.6.6"
+  }
+}
