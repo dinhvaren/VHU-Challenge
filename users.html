@@ -1,0 +1,276 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+  <title>Users | VHU InfoSec Lab</title>
+
+  <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.6.3/css/all.css" crossorigin="anonymous">
+  <link rel="stylesheet" href="css/bootstrap4-neon-glow.min.css">
+  <link href="https://fonts.googleapis.com/css?family=Roboto" rel="stylesheet">
+  <link rel="stylesheet" href="//cdn.jsdelivr.net/font-hack/2.020/css/hack.min.css">
+  <link rel="stylesheet" href="css/main.css">
+  <link rel="icon" type="image/png" href="/image/logo-removebg-preview.png" />
+</head>
+
+<body class="imgloaded">
+  <div class="glitch">
+    <div class="glitch__img"></div>
+  </div>
+
+  <!-- Navbar -->
+  <div class="navbar-dark text-white">
+    <div class="container">
+      <nav class="navbar px-0 navbar-expand-lg navbar-dark">
+        <a href="index.html" class="navbar-brand">
+          <h3><span class="color_danger">VHU</span><span class="color_white">Admin</span></h3>
+        </a>
+        <div class="navbar-nav ml-auto">
+          <a href="admin.html" class="p-3 text-decoration-none text-light bold">Dashboard</a>
+          <a href="login.html" class="p-3 text-decoration-none text-danger bold">Logout</a>
+        </div>
+      </nav>
+    </div>
+  </div>
+
+  <!-- Main content -->
+  <div class="jumbotron bg-transparent mb-0 pt-3 radius-0">
+    <div class="container">
+      <div class="row">
+        <!-- Sidebar -->
+        <div class="col-md-3">
+          <h4 class="bold color_white mb-4">Admin Panel</h4>
+          <div class="list-group">
+            <a href="admin.html" class="list-group-item list-group-item-action">Dashboard</a>
+            <a href="users.html" class="list-group-item list-group-item-action active">Users</a>
+            <a href="teams.html" class="list-group-item list-group-item-action">Teams</a>
+            <a href="challenges.html" class="list-group-item list-group-item-action">Challenges</a>
+            <a href="leaderboard.html" class="list-group-item list-group-item-action">Leaderboard</a>
+          </div>
+        </div>
+
+        <!-- Main Table -->
+        <div class="col-md-9">
+          <h2 class="bold color_white mb-4">Manage Users</h2>
+
+          <table class="table table-hover table-striped text-light" id="userTable">
+            <thead class="thead-dark">
+              <tr>
+                <th>#</th>
+                <th>Username</th>
+                <th>Email</th>
+                <th>Team ID</th>
+                <th>Role</th>
+                <th>Status</th>
+                <th>Actions</th>
+              </tr>
+            </thead>
+            <tbody class="hackerFont">
+              <tr>
+                <td>1</td>
+                <td>d1nhvar3n</td>
+                <td>d1nhvar3n@vhu.edu.vn</td>
+                <td>T001</td>
+                <td>Admin</td>
+                <td><span class="badge badge-success">Active</span></td>
+                <td>
+                  <button class="btn btn-sm btn-outline-primary mr-1 editBtn"><i class="fas fa-edit"></i></button>
+                  <button class="btn btn-sm btn-outline-danger deleteBtn"><i class="fas fa-trash"></i></button>
+                </td>
+              </tr>
+              <tr>
+                <td>2</td>
+                <td>alice</td>
+                <td>alice@vhu.edu.vn</td>
+                <td>T002</td>
+                <td>User</td>
+                <td><span class="badge badge-warning">Pending</span></td>
+                <td>
+                  <button class="btn btn-sm btn-outline-primary mr-1 editBtn"><i class="fas fa-edit"></i></button>
+                  <button class="btn btn-sm btn-outline-danger deleteBtn"><i class="fas fa-trash"></i></button>
+                </td>
+              </tr>
+            </tbody>
+          </table>
+
+          <button class="btn btn-outline-danger btn-shadow px-3 my-3" data-toggle="modal" data-target="#addUserModal">
+            <i class="fas fa-plus mr-2"></i>Add New User
+          </button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- 🟢 Add User Modal -->
+  <div class="modal fade" id="addUserModal" tabindex="-1" role="dialog">
+    <div class="modal-dialog modal-dialog-centered">
+      <div class="modal-content bg-dark text-light border border-danger">
+        <div class="modal-header border-danger">
+          <h5 class="modal-title color_danger bold">➕ Add New User</h5>
+          <button type="button" class="close text-light" data-dismiss="modal"><span>&times;</span></button>
+        </div>
+        <div class="modal-body hackerFont">
+          <form id="addUserForm">
+            <div class="form-group">
+              <label>Username</label>
+              <input type="text" class="form-control bg-transparent text-light" id="addUsername" required>
+            </div>
+            <div class="form-group">
+              <label>Email</label>
+              <input type="email" class="form-control bg-transparent text-light" id="addEmail" required>
+            </div>
+            <div class="form-group">
+              <label>Team ID</label>
+              <input type="text" class="form-control bg-transparent text-light" id="addTeamID" placeholder="e.g., T001">
+            </div>
+            <div class="form-group">
+              <label>Role</label>
+              <select class="form-control bg-transparent text-light" id="addRole">
+                <option>User</option>
+                <option>Admin</option>
+              </select>
+            </div>
+          </form>
+        </div>
+        <div class="modal-footer border-danger">
+          <button class="btn btn-outline-light" data-dismiss="modal">Cancel</button>
+          <button class="btn btn-outline-danger" id="saveAdd">Add User</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- 🟡 Edit User Modal -->
+  <div class="modal fade" id="editUserModal" tabindex="-1" role="dialog">
+    <div class="modal-dialog modal-dialog-centered">
+      <div class="modal-content bg-dark text-light border border-warning">
+        <div class="modal-header border-warning">
+          <h5 class="modal-title color_danger bold">✏️ Edit User</h5>
+          <button type="button" class="close text-light" data-dismiss="modal"><span>&times;</span></button>
+        </div>
+        <div class="modal-body hackerFont">
+          <form id="editUserForm">
+            <input type="hidden" id="editRowIndex">
+            <div class="form-group">
+              <label>Username</label>
+              <input type="text" class="form-control bg-transparent text-light" id="editUsername" required>
+            </div>
+            <div class="form-group">
+              <label>Email</label>
+              <input type="email" class="form-control bg-transparent text-light" id="editEmail" required>
+            </div>
+            <div class="form-group">
+              <label>Team ID</label>
+              <input type="text" class="form-control bg-transparent text-light" id="editTeamID">
+            </div>
+            <div class="form-group">
+              <label>Role</label>
+              <select class="form-control bg-transparent text-light" id="editRole">
+                <option>User</option>
+                <option>Admin</option>
+              </select>
+            </div>
+          </form>
+        </div>
+        <div class="modal-footer border-warning">
+          <button class="btn btn-outline-light" data-dismiss="modal">Cancel</button>
+          <button class="btn btn-outline-warning" id="saveEdit">Save Changes</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- 🔴 Delete Confirmation Modal -->
+  <div class="modal fade" id="deleteUserModal" tabindex="-1" role="dialog">
+    <div class="modal-dialog modal-dialog-centered">
+      <div class="modal-content bg-dark text-light border border-danger">
+        <div class="modal-header border-danger">
+          <h5 class="modal-title color_danger bold">⚠️ Confirm Deletion</h5>
+          <button type="button" class="close text-light" data-dismiss="modal"><span>&times;</span></button>
+        </div>
+        <div class="modal-body hackerFont">
+          Are you sure you want to delete this user? This action cannot be undone.
+        </div>
+        <div class="modal-footer border-danger">
+          <button class="btn btn-outline-light" data-dismiss="modal">Cancel</button>
+          <button class="btn btn-outline-danger" id="confirmDelete">Delete</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- JS -->
+  <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"></script>
+  <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
+
+  <!-- Logic JS -->
+  <script>
+    const table = document.getElementById("userTable").getElementsByTagName("tbody")[0];
+    let deleteRow = null;
+
+    // ADD USER
+    $("#saveAdd").on("click", function () {
+      const username = $("#addUsername").val();
+      const email = $("#addEmail").val();
+      const teamID = $("#addTeamID").val() || "—";
+      const role = $("#addRole").val();
+
+      if (!username || !email) return alert("Please fill in username and email.");
+
+      const row = table.insertRow();
+      const index = table.rows.length;
+      row.innerHTML = `
+        <td>${index}</td>
+        <td>${username}</td>
+        <td>${email}</td>
+        <td>${teamID}</td>
+        <td>${role}</td>
+        <td><span class="badge badge-success">Active</span></td>
+        <td>
+          <button class="btn btn-sm btn-outline-primary mr-1 editBtn"><i class="fas fa-edit"></i></button>
+          <button class="btn btn-sm btn-outline-danger deleteBtn"><i class="fas fa-trash"></i></button>
+        </td>`;
+      $("#addUserModal").modal("hide");
+      $("#addUserForm")[0].reset();
+    });
+
+    // EDIT USER
+    $(document).on("click", ".editBtn", function () {
+      const row = $(this).closest("tr")[0];
+      const cells = row.children;
+      $("#editRowIndex").val(row.rowIndex - 1);
+      $("#editUsername").val(cells[1].innerText);
+      $("#editEmail").val(cells[2].innerText);
+      $("#editTeamID").val(cells[3].innerText);
+      $("#editRole").val(cells[4].innerText);
+      $("#editUserModal").modal("show");
+    });
+
+    $("#saveEdit").on("click", function () {
+      const idx = $("#editRowIndex").val();
+      const row = table.rows[idx];
+      row.cells[1].innerText = $("#editUsername").val();
+      row.cells[2].innerText = $("#editEmail").val();
+      row.cells[3].innerText = $("#editTeamID").val();
+      row.cells[4].innerText = $("#editRole").val();
+      $("#editUserModal").modal("hide");
+    });
+
+    // DELETE USER
+    $(document).on("click", ".deleteBtn", function () {
+      deleteRow = $(this).closest("tr")[0];
+      $("#deleteUserModal").modal("show");
+    });
+
+    $("#confirmDelete").on("click", function () {
+      if (deleteRow) {
+        deleteRow.remove();
+        deleteRow = null;
+      }
+      $("#deleteUserModal").modal("hide");
+    });
+  </script>
+</body>
+</html>

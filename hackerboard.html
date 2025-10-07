@@ -11,7 +11,6 @@
     <link href="https://fonts.googleapis.com/css?family=Roboto" rel="stylesheet">
     <link rel='stylesheet' href='//cdn.jsdelivr.net/font-hack/2.020/css/hack.min.css'>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.13.0/moment.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.9.3/Chart.min.js"></script>
     <link rel="stylesheet" href="css/main.css">
     <link rel="icon" type="image/png" href="/image/logo-removebg-preview.png" />
 </head>
@@ -39,10 +38,10 @@
                     <div class="navbar-nav ml-auto">
                         <a href="index.html" class="p-3 text-decoration-none text-light bold">Home</a>
                         <a href="about.html" class="p-3 text-decoration-none text-light bold">About</a>
+                        <a href="challenges-user.html" class="p-3 text-decoration-none text-light bold">Challenges</a>
                         <a href="hackerboard.html" class="p-3 text-decoration-none text-white bold">Hackerboard</a>
                         <a href="login.html" class="p-3 text-decoration-none text-light bold">Login</a>
                         <a href="register.html" class="p-3 text-decoration-none text-light bold">Register</a>
-                        <a href="register-individual.html" class="p-3 text-decoration-none text-light bold">Individual Register</a>
                     </div>
                 </div>
             </nav>
@@ -65,49 +64,51 @@
                     </div>
                 </div>
             </div>
-            <div class="row mt-5  justify-content-center">
+            <div class="row mt-5 justify-content-center">
                 <div class="col-xl-10">
-                    <table class="table table-hover table-striped">
-                        <thead class="thead-dark hackerFont">
+                    <div class="table-responsive neon-table-container">
+                        <table class="table table-borderless neon-table text-center">
+                            <thead>
                             <tr>
                                 <th>#</th>
                                 <th>Team Name</th>
-                                <th># Challenges Solved</th>
+                                <th>Challenges Solved</th>
                                 <th>Total Time Taken</th>
                                 <th>Score</th>
                             </tr>
-                        </thead>
-                        <tbody>
+                            </thead>
+                            <tbody>
                             <tr>
-                                <th scope="row">1</th>
-                                <td>liveoverflow</td>
+                                <td>1</td>
+                                <td><span class="team-name pink">liveoverflow</span></td>
                                 <td>8</td>
                                 <td>42:59</td>
-                                <td>2540</td>
+                                <td><span class="score pink">2540</span></td>
                             </tr>
                             <tr>
-                                <th scope="row">2</th>
-                                <td>CR007</td>
+                                <td>2</td>
+                                <td><span class="team-name red">CR007</span></td>
                                 <td>6</td>
                                 <td>44:59</td>
-                                <td>1900</td>
+                                <td><span class="score red">1900</span></td>
                             </tr>
                             <tr>
-                                <th scope="row">3</th>
-                                <td>anonymous</td>
+                                <td>3</td>
+                                <td><span class="team-name green">anonymous</span></td>
                                 <td>4</td>
                                 <td>40:00</td>
-                                <td>650</td>
+                                <td><span class="score green">650</span></td>
                             </tr>
                             <tr>
-                                <th scope="row">4</th>
-                                <td>ashawe</td>
+                                <td>4</td>
+                                <td><span class="team-name blue">ashawe</span></td>
                                 <td>5</td>
                                 <td>40:10</td>
-                                <td>550</td>
+                                <td><span class="score blue">550</span></td>
                             </tr>
-                        </tbody>
-                    </table>
+                            </tbody>
+                        </table>
+                    </div>
                 </div>
             </div>
         </div>
@@ -120,149 +121,138 @@
 
     <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js@3.9.1/dist/chart.min.js"></script>
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
-    <script>
-        var s1 = {
-            label: 'ashawe',
-            borderColor: 'blue',
-            steppedLine: true,
-            data: [{
-                x: '2017-01-06 00:00:00',
-                y: 100
-            }, {
-                x: '2017-01-06 00:07:00',
-                y: 100
-            }, {
-                x: '2017-01-06 00:15:40',
-                y: 300
-            }, {
-                x: '2017-01-06 00:18:10',
-                y: 260
-            }, {
-                x: '2017-01-06 00:20:40',
-                y: 350
-            }, {
-                x: '2017-01-06 00:30:20',
-                y: 400
-            }, {
-                x: '2017-01-06 00:40:10',
-                y: 550
-            }, ]
-        };
+<script>
+  const ctx = document.getElementById("myChart").getContext("2d");
 
-        var s3 = {
-            label: 'anonymous',
-            borderColor: 'green',
-            steppedLine: true,
-            data: [{
-                x: '2017-01-06 00:00:00',
-                y: 100
-            }, {
-                x: '2017-01-06 00:10:00',
-                y: 120
-            }, {
-                x: '2017-01-06 00:15:00',
-                y: 400
-            }, {
-                x: '2017-01-06 00:21:00',
-                y: 360
-            }, {
-                x: '2017-01-06 00:25:00',
-                y: 390
-            }, {
-                x: '2017-01-06 00:40:00',
-                y: 650
-            }, ]
-        };
+  // 🌈 Gradient neon cho team top
+  const gradientPink = ctx.createLinearGradient(0, 0, 0, 400);
+  gradientPink.addColorStop(0, "#ff99ff");
+  gradientPink.addColorStop(1, "#ff0099");
 
-        var s2 = {
-            label: 'CR007',
-            borderColor: 'red',
-            steppedLine: true,
-            data: [{
-                x: '2017-01-06 00:00:00',
-                y: 100
-            }, {
-                x: '2017-01-06 00:05:00',
-                y: 150
-            }, {
-                x: '2017-01-06 00:15:00',
-                y: 350
-            }, {
-                x: '2017-01-06 00:21:00',
-                y: 500
-            }, {
-                x: '2017-01-06 00:25:00',
-                y: 800
-            }, {
-                x: '2017-01-06 00:40:00',
-                y: 900
-            }, {
-                x: '2017-01-06 00:44:59',
-                y: 1900
-            }, ]
-        };
-
-        var s4 = {
-            label: 'liveoverflow',
-            borderColor: 'pink',
-            steppedLine: true,
-            data: [{
-                x: '2017-01-06 00:00:00',
-                y: 100
-            }, {
-                x: '2017-01-06 00:03:00',
-                y: 100
-            }, {
-                x: '2017-01-06 00:07:34',
-                y: 250
-            }, {
-                x: '2017-01-06 00:10:45',
-                y: 500
-            }, {
-                x: '2017-01-06 00:13:29',
-                y: 650
-            }, {
-                x: '2017-01-06 00:21:00',
-                y: 900
-            }, {
-                x: '2017-01-06 00:33:59',
-                y: 1350
-            }, {
-                x: '2017-01-06 00:39:00',
-                y: 1680
-            }, {
-                x: '2017-01-06 00:42:59',
-                y: 2540
-            }, ]
-        };
-
-        var ctx = document.getElementById('myChart').getContext('2d');
-        var chart = new Chart(ctx, {
-            type: 'line',
-            data: {
-                datasets: [s1, s2, s3, s4]
-            },
-            options: {
-                scales: {
-                    yAxes: [{
-                        type: 'linear'
-                    }],
-                    xAxes: [{
-                        type: 'time',
-                        distribution: 'series', // or linear
-                        time: {
-                            unit: 'minute',
-                            displayFormats: {
-                                minute: 'mm:ss'
-                            },
-                            tooltipFormat: 'mm:ss'
-                        }
-                    }]
-                }
-            }
-        });
-    </script>
+  const chart = new Chart(ctx, {
+    type: "line",
+    data: {
+      datasets: [
+        {
+          label: "liveoverflow", // 🏆 Top
+          borderColor: gradientPink,
+          borderWidth: 3,
+          pointRadius: 4,
+          pointBackgroundColor: "#ff66cc",
+          data: [
+            { x: 0, y: 100 },
+            { x: 1, y: 700 },
+            { x: 2, y: 1600 },
+            { x: 3, y: 2400 },
+            { x: 4, y: 3200 },
+          ],
+          tension: 0.4,
+        },
+        {
+          label: "CR007", // 🥈 Mid-high
+          borderColor: "#ff0000",
+          borderWidth: 3,
+          pointRadius: 4,
+          pointBackgroundColor: "#ff0000",
+          data: [
+            { x: 0, y: 100 },
+            { x: 1, y: 500 },
+            { x: 2, y: 950 },
+            { x: 3, y: 1550 },
+            { x: 4, y: 1900 },
+          ],
+          tension: 0.4,
+        },
+        {
+          label: "anonymous", // 🥉 Mid
+          borderColor: "#00ff99",
+          borderWidth: 3,
+          pointRadius: 4,
+          pointBackgroundColor: "#00ff99",
+          data: [
+            { x: 0, y: 100 },
+            { x: 1, y: 300 },
+            { x: 2, y: 600 },
+            { x: 3, y: 850 },
+            { x: 4, y: 1100 },
+          ],
+          tension: 0.4,
+        },
+        {
+          label: "ashawe", // 🧩 Low
+          borderColor: "#3399ff",
+          borderWidth: 3,
+          pointRadius: 4,
+          pointBackgroundColor: "#3399ff",
+          data: [
+            { x: 0, y: 100 },
+            { x: 1, y: 200 },
+            { x: 2, y: 320 },
+            { x: 3, y: 430 },
+            { x: 4, y: 550 },
+          ],
+          tension: 0.4,
+        },
+      ],
+    },
+    options: {
+      responsive: true,
+      maintainAspectRatio: false,
+      plugins: {
+        legend: {
+          labels: {
+            color: "#00ffff",
+            font: { family: "Hack", size: 14 },
+          },
+        },
+        tooltip: {
+          backgroundColor: "rgba(0, 255, 255, 0.15)",
+          borderColor: "#00ffff",
+          borderWidth: 1,
+          titleColor: "#fff",
+          bodyColor: "#fff",
+          displayColors: false,
+        },
+      },
+      scales: {
+        x: {
+          type: "linear",
+          min: -0.3,
+          max: 4.3,
+          title: {
+            display: true,
+            text: "Challenges Solved",
+            color: "#00ffff",
+            font: { family: "Hack", size: 14 },
+          },
+          ticks: { color: "#aaa", font: { family: "Hack" } },
+          grid: { color: "rgba(0,255,255,0.1)" },
+        },
+        y: {
+          beginAtZero: true,
+          min: 0,
+          max: 3500,
+          title: {
+            display: true,
+            text: "Score",
+            color: "#00ffff",
+            font: { family: "Hack", size: 14 },
+          },
+          ticks: {
+            color: "#aaa",
+            font: { family: "Hack" },
+            stepSize: 500,
+          },
+          grid: { color: "rgba(0,255,255,0.1)" },
+        },
+      },
+      elements: {
+        line: { fill: false },
+      },
+    },
+  });
+</script>
 </body>
-
 </html>

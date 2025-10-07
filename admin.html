@@ -1,0 +1,154 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+  <title>Admin Dashboard | VHU InfoSec Lab</title>
+
+  <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.6.3/css/all.css" crossorigin="anonymous">
+  <link rel="stylesheet" href="css/bootstrap4-neon-glow.min.css">
+  <link href="https://fonts.googleapis.com/css?family=Roboto" rel="stylesheet">
+  <link rel="stylesheet" href="//cdn.jsdelivr.net/font-hack/2.020/css/hack.min.css">
+  <link rel="stylesheet" href="css/main.css">
+  <link rel="icon" type="image/png" href="/image/logo-removebg-preview.png" />
+</head>
+
+<body class="imgloaded">
+  <div class="glitch">
+    <div class="glitch__img"></div>
+    <div class="glitch__img"></div>
+    <div class="glitch__img"></div>
+    <div class="glitch__img"></div>
+    <div class="glitch__img"></div>
+  </div>
+
+  <!-- Navbar -->
+  <div class="navbar-dark text-white">
+    <div class="container">
+      <nav class="navbar px-0 navbar-expand-lg navbar-dark">
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavAltMarkup">
+          <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
+          <div class="navbar-nav">
+            <a href="index.html" class="pl-md-0 p-3 text-decoration-none text-light">
+              <h3 class="bold"><span class="color_danger">VHU</span><span class="color_white">Admin</span></h3>
+            </a>
+          </div>
+          <div class="navbar-nav ml-auto">
+            <a href="index.html" class="p-3 text-decoration-none text-light bold">Home</a>
+            <a href="hackerboard.html" class="p-3 text-decoration-none text-light bold">Leaderboard</a>
+            <a href="login.html" class="p-3 text-decoration-none text-danger bold">Logout</a>
+          </div>
+        </div>
+      </nav>
+    </div>
+  </div>
+
+  <!-- Main content -->
+  <div class="jumbotron bg-transparent mb-0 pt-3 radius-0">
+    <div class="container">
+      <div class="row">
+        <!-- Sidebar -->
+        <div class="col-md-3">
+          <h4 class="bold color_white mb-4">Admin Panel</h4>
+          <div class="list-group">
+            <a href="admin.html" class="list-group-item list-group-item-action active">Dashboard</a>
+            <a href="users.html" class="list-group-item list-group-item-action">Users</a>
+            <a href="teams.html" class="list-group-item list-group-item-action">Teams</a>
+            <a href="challenges.html" class="list-group-item list-group-item-action">Challenges</a>
+            <a href="leaderboard.html" class="list-group-item list-group-item-action">Leaderboard</a>
+          </div>
+        </div>
+
+        <!-- Dashboard Summary -->
+        <div class="col-md-9">
+          <h2 class="bold color_white mb-4">Dashboard Overview</h2>
+
+          <!-- Stats Row -->
+          <div class="row text-center mb-5 align-items-stretch">
+            <div class="col-md-3 mb-3 d-flex">
+              <div class="card bg-transparent border border-light w-100">
+                <div class="card-body d-flex flex-column justify-content-center">
+                  <h5 class="color_white mb-2">Users</h5>
+                  <h2 class="color_danger bold mb-0">124</h2>
+                </div>
+              </div>
+            </div>
+
+            <div class="col-md-3 mb-3 d-flex">
+              <div class="card bg-transparent border border-light w-100">
+                <div class="card-body d-flex flex-column justify-content-center">
+                  <h5 class="color_white mb-2">Challenges</h5>
+                  <h2 class="color_danger bold mb-0">42</h2>
+                </div>
+              </div>
+            </div>
+
+            <div class="col-md-3 mb-3 d-flex">
+              <div class="card bg-transparent border border-light w-100">
+                <div class="card-body d-flex flex-column justify-content-center">
+                  <h5 class="color_white mb-2">Flags</h5>
+                  <h2 class="color_danger bold mb-0">98</h2>
+                </div>
+              </div>
+            </div>
+
+            <div class="col-md-3 mb-3 d-flex">
+              <div class="card bg-transparent border border-light w-100">
+                <div class="card-body d-flex flex-column justify-content-center">
+                  <h5 class="color_white mb-2">Teams</h5>
+                  <h2 class="color_danger bold mb-0">18</h2>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Chart Section -->
+          <div class="card bg-transparent border border-light mb-5">
+            <div class="card-body">
+              <h5 class="color_white mb-3">📊 Submission Overview</h5>
+              <canvas id="adminChart" height="100"></canvas>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- JS -->
+  <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"></script>
+  <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/chart.js@3.9.1/dist/chart.min.js"></script>
+
+  <!-- Chart Setup -->
+  <script>
+    const ctx = document.getElementById("adminChart").getContext("2d");
+    new Chart(ctx, {
+      type: "line",
+      data: {
+        labels: ["Mon", "Tue", "Wed", "Thu", "Fri", "Sat", "Sun"],
+        datasets: [{
+          label: "Submissions per day",
+          data: [5, 8, 12, 9, 15, 18, 10],
+          borderColor: "#00ffff",
+          backgroundColor: "rgba(0,255,255,0.2)",
+          borderWidth: 2,
+          pointRadius: 4,
+          pointBackgroundColor: "#ff0040",
+          tension: 0.4,
+        }]
+      },
+      options: {
+        plugins: { legend: { labels: { color: "#fff" } } },
+        scales: {
+          x: { ticks: { color: "#aaa" }, grid: { color: "rgba(0,255,255,0.1)" } },
+          y: { ticks: { color: "#aaa" }, grid: { color: "rgba(0,255,255,0.1)" } }
+        }
+      }
+    });
+  </script>
+</body>
+</html>
