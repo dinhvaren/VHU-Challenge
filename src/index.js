@@ -11,7 +11,7 @@ const { engine } = require("express-handlebars");
 app.use(cookieParser());
 app.use(express.urlencoded({ extended: true }));
 app.use(express.json());
-app.use("/images", express.static(path.join(__dirname, "..", "images")));
+app.use("/image", express.static(path.join(__dirname, "..", "image")));
 
 app.engine(
   "hbs",
@@ -22,9 +22,10 @@ app.engine(
     },
     partialsDir: [
       path.join(__dirname, "views/partials"),
-      path.join(__dirname, "views/home"),
+      path.join(__dirname, "views/pages"),
       path.join(__dirname, "views/error"),
       path.join(__dirname, "views/auth"),
+      path.join(__dirname, "views/admin"),
     ],
     runtimeOptions: {
       allowProtoPropertiesByDefault: true,
