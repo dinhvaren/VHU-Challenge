@@ -1,6 +1,6 @@
 class HomeController {
   index(req, res, next) {
-    res.render("admin/teams", { page: { title: "VHU InfoSec Lab" } });
+    res.render("error/500", { page: { title: "VHU InfoSec Lab" } });
   }
 }
 

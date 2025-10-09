@@ -1,77 +1,90 @@
-    <div class="glitch">
-        <div class="glitch__img glitch__img_register"></div>
-        <div class="glitch__img glitch__img_register"></div>
-        <div class="glitch__img glitch__img_register"></div>
-        <div class="glitch__img glitch__img_register"></div>
-        <div class="glitch__img glitch__img_register"></div>
-    </div>
-    <div class="navbar-dark text-white">
-        <div class="container">
-            <nav class="navbar px-0 navbar-expand-lg navbar-dark">
-                <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavAltMarkup" aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">
-          <span class="navbar-toggler-icon"></span>
-        </button>
-                <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
-                    <div class="navbar-nav">
-                        <a href="index.html" class="pl-md-0 p-3 text-decoration-none text-light">
-                            <h3 class="bold"><span class="color_danger">VHU </span><span class="color_white">InfoSec Lab</span></h3>
-                        </a>
-                    </div>
-                    <div class="navbar-nav ml-auto">
-                        <a href="index.html" class="p-3 text-decoration-none text-light bold">Home</a>
-                        <a href="about.html" class="p-3 text-decoration-none text-light bold">About</a>
-                        <a href="challenges-user.html" class="p-3 text-decoration-none text-light bold">Challenges</a>
-                        <a href="hackerboard.html" class="p-3 text-decoration-none text-light bold">Hackerboard</a>
-                        <a href="login.html" class="p-3 text-decoration-none text-light bold">Login</a>
-                        <a href="register.html" class="p-3 text-decoration-none text-white bold">Register</a>
-                    </div>
-                </div>
-            </nav>
-        </div>
-    </div>
+<!-- Background glitch -->
+<div class="glitch">
+  <div class="glitch__img glitch__img_register"></div>
+  <div class="glitch__img glitch__img_register"></div>
+  <div class="glitch__img glitch__img_register"></div>
+  <div class="glitch__img glitch__img_register"></div>
+  <div class="glitch__img glitch__img_register"></div>
+</div>
 
-    <div class="jumbotron bg-transparent mb-0 pt-3 radius-0">
-        <div class="container">
-            <div class="row">
-                <div class="col-xl-10">
-                    <h1 class="display-1 bold color_white content__title">VHU CTF</h1>
-                    <p class="text-grey text-spacey hackerFont lead mb-5">
-                        Compete with the best. Break systems, not rules.
-                    </p>
-                    <div class="row  hackerFont">
-                        <div class="col-md-6">
-                            <div class="form-group">
-                                <input type="text" class="form-control" id="team_code" placeholder="Team Code (e.g., VHU-CTF-01)">
-                                <small class="form-text text-muted">
-                                Don’t have a team code? Register your team <a href="register-individual.html">here</a>.
-                                </small>
-                            </div>
-                            <div class="form-group">
-                                <input type="text" class="form-control" id="team_name" placeholder="Team name">
-                            </div>
-                            <div class="form-group">
-                                <input type="password" class="form-control" id="password" placeholder="New Password">
-                                <small id="passHelp" class="form-text text-muted">Make sure nobody's behind you</small>
-                            </div>
-                            <div class="custom-control custom-checkbox my-4">
-                                <input type="checkbox" class="custom-control-input" id="solemnly-swear">
-                                <label class="custom-control-label" for="solemnly-swear">I solemnly swear that I am up to no good.</label>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            <div class="row">
-                <div class="col-xl-12">
-                    <button class="btn btn-outline-danger btn-shadow px-3 my-2 ml-0 ml-sm-1 text-left typewriter" onclick="window.location.href='login.html';">
-                            <h4>Register</h4>
-                    </button>
-                    <small id="registerHelp" class="mt-2 form-text text-muted">Already Registered? <a href="login.html">Login here</a></small>
-                </div>
-            </div>
+<!-- Navbar -->
+<div class="navbar-dark text-white">
+  <div class="container">
+    <nav class="navbar px-0 navbar-expand-lg navbar-dark">
+      <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavAltMarkup"
+        aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+      <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
+        <div class="navbar-nav">
+          <a href="/" class="pl-md-0 p-3 text-decoration-none text-light">
+            <h3 class="bold"><span class="color_danger">VHU </span><span class="color_white">InfoSec Lab</span></h3>
+          </a>
         </div>
-    </div>
+        <div class="navbar-nav ml-auto">
+          <a href="/" class="p-3 text-decoration-none text-light bold">Home</a>
+          <a href="/about" class="p-3 text-decoration-none text-light bold">About</a>
+          <a href="/challenges" class="p-3 text-decoration-none text-light bold">Challenges</a>
+          <a href="/hackerboard" class="p-3 text-decoration-none text-light bold">Hackerboard</a>
+          <a href="/auth/login" class="p-3 text-decoration-none text-light bold">Login</a>
+          <a href="/auth/register" class="p-3 text-decoration-none text-white bold">Register</a>
+        </div>
+      </div>
+    </nav>
+  </div>
+</div>
 
-    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
-    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
+<!-- Register Form -->
+<div class="jumbotron bg-transparent mb-0 pt-3 radius-0">
+  <div class="container">
+    <div class="row">
+      <div class="col-xl-10">
+        <h1 class="display-1 bold color_white content__title">VHU CTF</h1>
+        <p class="text-grey text-spacey hackerFont lead mb-5">
+          Compete with the best. Break systems, not rules.
+        </p>
+        <div class="row hackerFont">
+          <div class="col-md-6">
+            <form action="/auth/register" method="POST">
+              <div class="form-group">
+                <input type="text" class="form-control" name="teamCode" placeholder="Team Code (e.g., VHU-CTF-01)">
+                <small class="form-text text-muted">
+                  Don’t have a team code? Register individually
+                  <a href="/auth/register-individual">here</a>.
+                </small>
+              </div>
+
+              <div class="form-group">
+                <input type="text" class="form-control" name="teamName" placeholder="Team Name" required>
+              </div>
+
+              <div class="form-group">
+                <input type="password" class="form-control" name="password" placeholder="New Password" required>
+                <small id="passHelp" class="form-text text-muted">Make sure nobody's behind you</small>
+              </div>
+
+              <div class="custom-control custom-checkbox my-4">
+                <input type="checkbox" class="custom-control-input" id="agree" required>
+                <label class="custom-control-label" for="agree">
+                  I solemnly swear that I am up to no good.
+                </label>
+              </div>
+
+              <button type="submit" class="btn btn-outline-danger btn-shadow px-3 my-2 ml-0 ml-sm-1 text-left typewriter">
+                <h4>Register</h4>
+              </button>
+
+              <small id="registerHelp" class="mt-2 form-text text-muted">
+                Already Registered? <a href="/auth/login">Login here</a>
+              </small>
+            </form>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" crossorigin="anonymous"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" crossorigin="anonymous"></script>
