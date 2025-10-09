@@ -12,6 +12,8 @@ app.use(cookieParser());
 app.use(express.urlencoded({ extended: true }));
 app.use(express.json());
 app.use("/image", express.static(path.join(__dirname, "..", "image")));
+app.use(express.static(path.join(__dirname, '..', 'public')));
+
 
 app.engine(
   "hbs",

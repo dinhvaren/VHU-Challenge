@@ -1,21 +1,3 @@
-<!DOCTYPE html>
-<html lang="en">
-
-<head>
-    <!-- Required meta tags -->
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-    <title>VHU InfoSec Lab</title>
-    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.6.3/css/all.css" integrity="sha384-UHRtZLI+pbxtHCWp1t77Bi1L4ZtiqrqD80Kn4Z8NTSRyMA2Fd33n5dQ8lWUE00s/" crossorigin="anonymous">
-    <link rel="stylesheet" href="/public/css/bootstrap4-neon-glow.min.css">
-    <link href="https://fonts.googleapis.com/css?family=Roboto" rel="stylesheet">
-    <link rel='stylesheet' href='//cdn.jsdelivr.net/font-hack/2.020/css/hack.min.css'>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.13.0/moment.min.js"></script>
-    <link rel="stylesheet" href="/public/css/main.css">
-    <link rel="icon" type="image/png" href="/image/logo-removebg-preview.png" />
-</head>
-
-<body class="imgloaded">
     <div class="glitch">
         <div class="glitch__img glitch__img_leaderboard"></div>
         <div class="glitch__img glitch__img_leaderboard"></div>
@@ -115,10 +97,6 @@
     </div>
 
 
-
-    <!-- Optional JavaScript -->
-    <!-- jQuery first, then Popper.js, then Bootstrap JS -->
-
     <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
     <script src="https://cdn.jsdelivr.net/npm/chart.js@3.9.1/dist/chart.min.js"></script>
@@ -126,7 +104,6 @@
 <script>
   const ctx = document.getElementById("myChart").getContext("2d");
 
-  // 🌈 Gradient neon cho team top
   const gradientPink = ctx.createLinearGradient(0, 0, 0, 400);
   gradientPink.addColorStop(0, "#ff99ff");
   gradientPink.addColorStop(1, "#ff0099");
@@ -136,7 +113,7 @@
     data: {
       datasets: [
         {
-          label: "liveoverflow", // 🏆 Top
+          label: "liveoverflow",
           borderColor: gradientPink,
           borderWidth: 3,
           pointRadius: 4,
@@ -151,7 +128,7 @@
           tension: 0.4,
         },
         {
-          label: "CR007", // 🥈 Mid-high
+          label: "CR007",
           borderColor: "#ff0000",
           borderWidth: 3,
           pointRadius: 4,
@@ -166,7 +143,7 @@
           tension: 0.4,
         },
         {
-          label: "anonymous", // 🥉 Mid
+          label: "anonymous", 
           borderColor: "#00ff99",
           borderWidth: 3,
           pointRadius: 4,
@@ -181,7 +158,7 @@
           tension: 0.4,
         },
         {
-          label: "ashawe", // 🧩 Low
+          label: "ashawe",
           borderColor: "#3399ff",
           borderWidth: 3,
           pointRadius: 4,
@@ -254,5 +231,3 @@
     },
   });
 </script>
-</body>
-</html>
