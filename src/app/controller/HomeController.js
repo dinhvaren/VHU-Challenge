@@ -1,6 +1,6 @@
 class HomeController {
   index(req, res, next) {
-    res.render("auth/register-individual", { page: { title: "VHU InfoSec Lab" } });
+    res.render("admin/leaderboard", { page: { title: "VHU InfoSec Lab" } });
   }
 }
 
