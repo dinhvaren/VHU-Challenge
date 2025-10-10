@@ -1,6 +1,93 @@
+const { Challenge, Team, User } = require("../models");
 class HomeController {
-  index(req, res, next) {
-    res.render("error/500", { page: { title: "VHU InfoSec Lab" } });
+  // [GET] /
+  async index(req, res, next) {
+    try {
+      res.render("pages/index", {
+        title: "VHU InfoSec Lab | Home",
+        message: "Welcome to VHU CTF Platform",
+      });
+    } catch (err) {
+      console.error("Home Index Error:", err);
+      res.status(500).render("error/500", {
+        page: { title: "Server Error" },
+        message: "Something went wrong while loading homepage.",
+      });
+    }
+  }
+
+  // [GET] /about
+  about(req, res) {
+    try {
+      res.render("pages/about", {
+        title: "About | VHU InfoSec Lab",
+        description:
+          "VHU InfoSec Lab là môi trường học tập & CTF Platform dành cho sinh viên ngành An toàn thông tin tại Đại học Văn Hiến.",
+      });
+    } catch (err) {
+      console.error("Home About Error:", err);
+      res.status(500).render("error/500", {
+        page: { title: "Server Error" },
+        message: "Server error while rendering about page.",
+      });
+    }
+  }
+
+  // [GET] /hackerboard
+  async hackerboard(req, res) {
+    try {
+      const teams = await Team.find()
+        .sort({ score: -1 })
+        .limit(10)
+        .populate("members");
+
+      res.render("pages/hackerboard", {
+        title: "Hackerboard | VHU InfoSec Lab",
+        message: "Top 10 teams in the VHU CTF Platform.",
+        teams,
+      });
+    } catch (err) {
+      console.error("Hackerboard Error:", err);
+      res.status(500).render("error/500", {
+        page: { title: "Server Error" },
+        message: "Server error while loading hackerboard.",
+      });
+    }
+  }
+
+  // [GET] /challenges
+  async challenges(req, res) {
+    try {
+      const challenges = await Challenge.find().select("title category score");
+
+      res.render("pages/challenges-user", {
+        title: "Challenges | VHU InfoSec Lab",
+        message: "Select a challenge and start hacking!",
+        challenges,
+      });
+    } catch (err) {
+      console.error("Challenges Error:", err);
+      res.status(500).render("error/500", {
+        page: { title: "Server Error" },
+        message: "Server error while loading challenges.",
+      });
+    }
+  }
+
+  // [GET] /feedback
+  feedback(req, res) {
+    try {
+      res.render("pages/feedback", {
+        title: "Feedback | VHU InfoSec Lab",
+        message: "Your feedback helps us improve the CTF experience.",
+      });
+    } catch (err) {
+      console.error("Feedback Error:", err);
+      res.status(500).render("error/500", {
+        page: { title: "Server Error" },
+        message: "Server error while loading feedback page.",
+      });
+    }
   }
 }
 
