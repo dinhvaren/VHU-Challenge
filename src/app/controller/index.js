@@ -4,6 +4,7 @@ const AuthController = require("./AuthController");
 const ChallengeController = require("./ChallengeController");
 const TeamController = require("./TeamController");
 const UserController = require("./UserController");
+const AdminController = require("./AdminController");
 
 module.exports = {
     HomeController,
@@ -12,4 +13,5 @@ module.exports = {
     AuthController,
     TeamController,
     ChallengeController,
+    AdminController,
 }
