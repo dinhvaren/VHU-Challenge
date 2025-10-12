@@ -54,32 +54,25 @@
             </tr>
           </thead>
           <tbody class="hackerFont">
-            <tr>
-              <td>1</td>
-              <td>d1nhvar3n</td>
-              <td>VHU_Elite</td>
-              <td>Hidden Message</td>
-              <td>vhuCTF{flag123}</td>
-              <td><span class="badge badge-success">Correct</span></td>
-              <td>192.168.1.10</td>
-              <td>2025-10-12 10:25</td>
+            {{#each submissions}}
+            <tr data-id="{{_id}}">
+              <td>{{@index}}</td>
+              <td>{{user.username}}</td>
+              <td>{{team.name}}</td>
+              <td>{{challenge.title}}</td>
+              <td>{{flag}}</td>
+              <td>
+                <span class="badge {{#if (eq result 'Correct')}}badge-success{{else}}badge-danger{{/if}}">
+                  {{result}}
+                </span>
+              </td>
+              <td>{{ip}}</td>
+              <td>{{submittedAt}}</td>
               <td>
                 <button class="btn btn-sm btn-outline-danger deleteBtn"><i class="fas fa-trash"></i></button>
               </td>
             </tr>
-            <tr>
-              <td>2</td>
-              <td>anonymous</td>
-              <td>Solo</td>
-              <td>SQL Injection</td>
-              <td>vhuCTF{wrongflag}</td>
-              <td><span class="badge badge-danger">Wrong</span></td>
-              <td>203.162.12.5</td>
-              <td>2025-10-12 11:02</td>
-              <td>
-                <button class="btn btn-sm btn-outline-danger deleteBtn"><i class="fas fa-trash"></i></button>
-              </td>
-            </tr>
+            {{/each}}
           </tbody>
         </table>
       </div>
@@ -106,25 +99,85 @@
   </div>
 </div>
 
+<!-- 🔔 Toast Notification -->
+<div aria-live="polite" aria-atomic="true"
+     style="position: fixed; top: 1rem; right: 1rem; z-index: 9999;">
+  <div id="toastMsg" class="toast bg-dark text-light border border-danger" data-delay="3000">
+    <div class="toast-header bg-danger text-white">
+      <strong class="mr-auto" id="toastTitle">Notification</strong>
+      <button type="button" class="ml-2 mb-1 close text-white" data-dismiss="toast">&times;</button>
+    </div>
+    <div class="toast-body hackerFont" id="toastBody">Message goes here.</div>
+  </div>
+</div>
+
 <!-- JS -->
-<script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"></script>
+<script src="https://code.jquery.com/jquery-3.3.1.min.js"></script> <!-- ✅ full version -->
 <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"></script>
 <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
 
 <!-- Logic -->
 <script>
+  // ✅ Toast Function
+  function showToast(type, message) {
+    const toast = $("#toastMsg");
+    const title = $("#toastTitle");
+    const body = $("#toastBody");
+
+    toast.removeClass("border-danger border-success border-warning");
+    $(".toast-header").removeClass("bg-danger bg-success bg-warning text-dark text-white");
+
+    if (type === "success") {
+      $(".toast-header").addClass("bg-success text-white");
+      toast.addClass("border-success");
+      title.text("✅ Success");
+    } else if (type === "error") {
+      $(".toast-header").addClass("bg-danger text-white");
+      toast.addClass("border-danger");
+      title.text("❌ Error");
+    } else if (type === "warning") {
+      $(".toast-header").addClass("bg-warning text-dark");
+      toast.addClass("border-warning");
+      title.text("⚠️ Warning");
+    }
+
+    body.text(message);
+    toast.toast({ delay: 3000 });
+    toast.toast("show");
+  }
+
+  // 🧠 Logic
   const table = document.getElementById("submissionTable").getElementsByTagName("tbody")[0];
   let deleteRow = null;
+  let deleteId = null;
 
-  // DELETE Submission
+  // 🟥 Click delete
   $(document).on("click", ".deleteBtn", function () {
-    deleteRow = $(this).closest("tr")[0];
+    const row = $(this).closest("tr")[0];
+    deleteRow = row;
+    deleteId = row.getAttribute("data-id");
     $("#deleteSubmissionModal").modal("show");
   });
 
-  $("#confirmDelete").on("click", function () {
-    if (deleteRow) deleteRow.remove();
-    deleteRow = null;
-    $("#deleteSubmissionModal").modal("hide");
+  // 🟢 Confirm delete
+  $("#confirmDelete").on("click", async function () {
+    if (!deleteId) return;
+
+    try {
+      const res = await fetch(`/submission/${deleteId}`, { method: "DELETE" });
+      const data = await res.json();
+
+      if (!res.ok) throw new Error(data.message || "Failed to delete submission.");
+
+      deleteRow.remove();
+      showToast("success", data.message || "Submission deleted successfully!");
+    } catch (err) {
+      console.error("Delete Submission Error:", err);
+      showToast("error", err.message);
+    } finally {
+      deleteRow = null;
+      deleteId = null;
+      $("#deleteSubmissionModal").modal("hide");
+    }
   });
 </script>

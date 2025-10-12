@@ -35,7 +35,7 @@
         </div>
       </div>
 
-      <!-- Main Table -->
+      <!-- Main Content -->
       <div class="col-md-9">
         <h2 class="bold color_white mb-4">Manage Challenges</h2>
 
@@ -43,39 +43,33 @@
           <thead class="thead-dark">
             <tr>
               <th>#</th>
-              <th>Challenge</th>
+              <th>Title</th>
               <th>Category</th>
               <th>Points</th>
-              <th>Flag</th>
+              <th>Difficulty</th>
               <th>Status</th>
               <th>Actions</th>
             </tr>
           </thead>
           <tbody class="hackerFont">
-            <tr>
-              <td>1</td>
-              <td>SQL Injection</td>
-              <td>Web</td>
-              <td>100</td>
-              <td><code>vhuCTF{sql_basic_flag}</code></td>
-              <td><span class="badge badge-success">Active</span></td>
+            {{#each challenges}}
+            <tr data-id="{{_id}}">
+              <td>{{@index}}</td>
+              <td>{{title}}</td>
+              <td>{{category}}</td>
+              <td>{{points}}</td>
+              <td>{{difficulty}}</td>
+              <td>
+                <span class="badge {{#if (eq status 'Active')}}badge-success{{else}}badge-secondary{{/if}}">
+                  {{status}}
+                </span>
+              </td>
               <td>
                 <button class="btn btn-sm btn-outline-primary mr-1 editBtn"><i class="fas fa-edit"></i></button>
                 <button class="btn btn-sm btn-outline-danger deleteBtn"><i class="fas fa-trash"></i></button>
               </td>
             </tr>
-            <tr>
-              <td>2</td>
-              <td>Hidden Message</td>
-              <td>Crypto</td>
-              <td>150</td>
-              <td><code>vhuCTF{crypto_secret}</code></td>
-              <td><span class="badge badge-warning">Draft</span></td>
-              <td>
-                <button class="btn btn-sm btn-outline-primary mr-1 editBtn"><i class="fas fa-edit"></i></button>
-                <button class="btn btn-sm btn-outline-danger deleteBtn"><i class="fas fa-trash"></i></button>
-              </td>
-            </tr>
+            {{/each}}
           </tbody>
         </table>
 
@@ -89,7 +83,7 @@
 
 <!-- 🟢 Add Challenge Modal -->
 <div class="modal fade" id="addChallengeModal" tabindex="-1" role="dialog">
-  <div class="modal-dialog modal-dialog-centered">
+  <div class="modal-dialog modal-dialog-centered modal-lg">
     <div class="modal-content bg-dark text-light border border-danger">
       <div class="modal-header border-danger">
         <h5 class="modal-title color_danger bold">➕ Add New Challenge</h5>
@@ -97,34 +91,53 @@
       </div>
       <div class="modal-body hackerFont">
         <form id="addChallengeForm">
-          <div class="form-group">
-            <label>Challenge Name</label>
-            <input type="text" class="form-control bg-transparent text-light" id="addName" required>
+          <div class="form-row">
+            <div class="form-group col-md-6">
+              <label>Title</label>
+              <input type="text" class="form-control bg-transparent text-light" id="addTitle" required>
+            </div>
+            <div class="form-group col-md-3">
+              <label>Category</label>
+              <select class="form-control bg-transparent text-light" id="addCategory">
+                <option>Web</option>
+                <option>Crypto</option>
+                <option>Forensics</option>
+                <option>Pwn</option>
+                <option>Misc</option>
+              </select>
+            </div>
+            <div class="form-group col-md-3">
+              <label>Points</label>
+              <input type="number" class="form-control bg-transparent text-light" id="addPoints" value="100" required>
+            </div>
           </div>
-          <div class="form-group">
-            <label>Category</label>
-            <select class="form-control bg-transparent text-light" id="addCategory">
-              <option>Web</option>
-              <option>Crypto</option>
-              <option>Forensics</option>
-              <option>Misc</option>
-              <option>Pwn</option>
-            </select>
+
+          <div class="form-row">
+            <div class="form-group col-md-6">
+              <label>Difficulty</label>
+              <select class="form-control bg-transparent text-light" id="addDifficulty">
+                <option>Easy</option>
+                <option>Medium</option>
+                <option>Hard</option>
+              </select>
+            </div>
+            <div class="form-group col-md-6">
+              <label>Status</label>
+              <select class="form-control bg-transparent text-light" id="addStatus">
+                <option>Active</option>
+                <option>Draft</option>
+              </select>
+            </div>
           </div>
+
           <div class="form-group">
-            <label>Points</label>
-            <input type="number" class="form-control bg-transparent text-light" id="addPoints" value="100">
+            <label>Description</label>
+            <textarea class="form-control bg-transparent text-light" id="addDescription" rows="3"></textarea>
           </div>
+
           <div class="form-group">
             <label>Flag</label>
-            <input type="text" class="form-control bg-transparent text-light" id="addFlag" placeholder="vhuCTF{example_flag}" required>
-          </div>
-          <div class="form-group">
-            <label>Status</label>
-            <select class="form-control bg-transparent text-light" id="addStatus">
-              <option>Active</option>
-              <option>Draft</option>
-            </select>
+            <input type="text" class="form-control bg-transparent text-light" id="addFlag" placeholder="vhuCTF{...}" required>
           </div>
         </form>
       </div>
@@ -138,7 +151,7 @@
 
 <!-- 🟡 Edit Challenge Modal -->
 <div class="modal fade" id="editChallengeModal" tabindex="-1" role="dialog">
-  <div class="modal-dialog modal-dialog-centered">
+  <div class="modal-dialog modal-dialog-centered modal-lg">
     <div class="modal-content bg-dark text-light border border-warning">
       <div class="modal-header border-warning">
         <h5 class="modal-title color_danger bold">✏️ Edit Challenge</h5>
@@ -146,35 +159,49 @@
       </div>
       <div class="modal-body hackerFont">
         <form id="editChallengeForm">
-          <input type="hidden" id="editRowIndex">
-          <div class="form-group">
-            <label>Challenge Name</label>
-            <input type="text" class="form-control bg-transparent text-light" id="editName" required>
+          <input type="hidden" id="editId">
+          <div class="form-row">
+            <div class="form-group col-md-6">
+              <label>Title</label>
+              <input type="text" class="form-control bg-transparent text-light" id="editTitle" required>
+            </div>
+            <div class="form-group col-md-3">
+              <label>Category</label>
+              <select class="form-control bg-transparent text-light" id="editCategory">
+                <option>Web</option>
+                <option>Crypto</option>
+                <option>Forensics</option>
+                <option>Pwn</option>
+                <option>Misc</option>
+              </select>
+            </div>
+            <div class="form-group col-md-3">
+              <label>Points</label>
+              <input type="number" class="form-control bg-transparent text-light" id="editPoints" required>
+            </div>
           </div>
-          <div class="form-group">
-            <label>Category</label>
-            <select class="form-control bg-transparent text-light" id="editCategory">
-              <option>Web</option>
-              <option>Crypto</option>
-              <option>Forensics</option>
-              <option>Misc</option>
-              <option>Pwn</option>
-            </select>
+
+          <div class="form-row">
+            <div class="form-group col-md-6">
+              <label>Difficulty</label>
+              <select class="form-control bg-transparent text-light" id="editDifficulty">
+                <option>Easy</option>
+                <option>Medium</option>
+                <option>Hard</option>
+              </select>
+            </div>
+            <div class="form-group col-md-6">
+              <label>Status</label>
+              <select class="form-control bg-transparent text-light" id="editStatus">
+                <option>Active</option>
+                <option>Draft</option>
+              </select>
+            </div>
           </div>
+
           <div class="form-group">
-            <label>Points</label>
-            <input type="number" class="form-control bg-transparent text-light" id="editPoints">
-          </div>
-          <div class="form-group">
-            <label>Flag</label>
-            <input type="text" class="form-control bg-transparent text-light" id="editFlag" placeholder="vhuCTF{updated_flag}">
-          </div>
-          <div class="form-group">
-            <label>Status</label>
-            <select class="form-control bg-transparent text-light" id="editStatus">
-              <option>Active</option>
-              <option>Draft</option>
-            </select>
+            <label>Description</label>
+            <textarea class="form-control bg-transparent text-light" id="editDescription" rows="3"></textarea>
           </div>
         </form>
       </div>
@@ -205,76 +232,116 @@
   </div>
 </div>
 
+<!-- 🔔 Toast -->
+<div aria-live="polite" aria-atomic="true" style="position: fixed; top: 1rem; right: 1rem; z-index: 9999;">
+  <div id="toastMsg" class="toast bg-dark text-light border border-danger" data-delay="3000">
+    <div class="toast-header bg-danger text-white">
+      <strong class="mr-auto" id="toastTitle">Notification</strong>
+      <button type="button" class="ml-2 mb-1 close text-white" data-dismiss="toast">&times;</button>
+    </div>
+    <div class="toast-body hackerFont" id="toastBody">Message goes here.</div>
+  </div>
+</div>
+
 <!-- JS -->
-<script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"></script>
+<script src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"></script>
 <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
 
 <!-- Logic -->
 <script>
+  function showToast(type, message) {
+    const toast = $("#toastMsg");
+    const title = $("#toastTitle");
+    const body = $("#toastBody");
+    toast.removeClass("border-danger border-success border-warning");
+    $(".toast-header").removeClass("bg-danger bg-success bg-warning text-dark text-white");
+    if (type === "success") { $(".toast-header").addClass("bg-success text-white"); toast.addClass("border-success"); title.text("✅ Success"); }
+    else if (type === "error") { $(".toast-header").addClass("bg-danger text-white"); toast.addClass("border-danger"); title.text("❌ Error"); }
+    else { $(".toast-header").addClass("bg-warning text-dark"); toast.addClass("border-warning"); title.text("⚠️ Warning"); }
+    body.text(message); toast.toast({ delay: 3000 }); toast.toast("show");
+  }
+
   const table = document.getElementById("challengeTable").getElementsByTagName("tbody")[0];
-  let deleteRow = null;
+  let deleteRow = null, deleteId = null;
 
-  // ADD Challenge
-  $("#saveAdd").on("click", function () {
-    const name = $("#addName").val();
-    const cat = $("#addCategory").val();
-    const pts = $("#addPoints").val();
-    const flag = $("#addFlag").val();
-    const status = $("#addStatus").val();
-
-    if (!name || !flag) return alert("Please fill in all required fields.");
-
-    const row = table.insertRow();
-    const index = table.rows.length;
-    row.innerHTML = `
-      <td>${index}</td>
-      <td>${name}</td>
-      <td>${cat}</td>
-      <td>${pts}</td>
-      <td><code>${flag}</code></td>
-      <td><span class="badge badge-${status === 'Active' ? 'success' : 'warning'}">${status}</span></td>
-      <td>
-        <button class="btn btn-sm btn-outline-primary mr-1 editBtn"><i class="fas fa-edit"></i></button>
-        <button class="btn btn-sm btn-outline-danger deleteBtn"><i class="fas fa-trash"></i></button>
-      </td>`;
-    $("#addChallengeModal").modal("hide");
-    $("#addChallengeForm")[0].reset();
+  // 🟢 Add Challenge
+  $("#saveAdd").on("click", async function () {
+    const payload = {
+      title: $("#addTitle").val().trim(),
+      category: $("#addCategory").val(),
+      points: parseInt($("#addPoints").val()) || 0,
+      difficulty: $("#addDifficulty").val(),
+      status: $("#addStatus").val(),
+      description: $("#addDescription").val(),
+      flag: $("#addFlag").val().trim(),
+    };
+    if (!payload.title || !payload.flag) return showToast("warning", "Please fill in all required fields.");
+    try {
+      const res = await fetch("/challenge", {
+        method: "POST", headers: { "Content-Type": "application/json" },
+        body: JSON.stringify(payload)
+      });
+      const data = await res.json();
+      if (!res.ok) throw new Error(data.message);
+      showToast("success", data.message || "Challenge added!");
+      setTimeout(() => window.location.reload(), 2000);
+    } catch (err) { showToast("error", err.message); }
+    finally { $("#addChallengeModal").modal("hide"); $("#addChallengeForm")[0].reset(); }
   });
 
-  // EDIT Challenge
+  // 🟡 Edit Challenge
   $(document).on("click", ".editBtn", function () {
     const row = $(this).closest("tr")[0];
-    $("#editRowIndex").val(row.rowIndex - 1);
-    $("#editName").val(row.cells[1].innerText);
+    $("#editId").val(row.getAttribute("data-id"));
+    $("#editTitle").val(row.cells[1].innerText);
     $("#editCategory").val(row.cells[2].innerText);
     $("#editPoints").val(row.cells[3].innerText);
-    $("#editFlag").val(row.cells[4].innerText.replace(/`/g, ''));
+    $("#editDifficulty").val(row.cells[4].innerText);
     $("#editStatus").val(row.cells[5].innerText.trim());
     $("#editChallengeModal").modal("show");
   });
 
-  $("#saveEdit").on("click", function () {
-    const idx = $("#editRowIndex").val();
-    const row = table.rows[idx];
-    row.cells[1].innerText = $("#editName").val();
-    row.cells[2].innerText = $("#editCategory").val();
-    row.cells[3].innerText = $("#editPoints").val();
-    row.cells[4].innerHTML = `<code>${$("#editFlag").val()}</code>`;
-    const status = $("#editStatus").val();
-    row.cells[5].innerHTML = `<span class="badge badge-${status === 'Active' ? 'success' : 'warning'}">${status}</span>`;
-    $("#editChallengeModal").modal("hide");
+  $("#saveEdit").on("click", async function () {
+    const id = $("#editId").val();
+    const payload = {
+      title: $("#editTitle").val().trim(),
+      category: $("#editCategory").val(),
+      points: parseInt($("#editPoints").val()) || 0,
+      difficulty: $("#editDifficulty").val(),
+      status: $("#editStatus").val(),
+      description: $("#editDescription").val(),
+    };
+    if (!payload.title) return showToast("warning", "Please fill in all required fields.");
+    try {
+      const res = await fetch(`/challenge/${id}`, {
+        method: "PUT", headers: { "Content-Type": "application/json" },
+        body: JSON.stringify(payload)
+      });
+      const data = await res.json();
+      if (!res.ok) throw new Error(data.message);
+      showToast("success", data.message || "Challenge updated!");
+      setTimeout(() => window.location.reload(), 2000);
+    } catch (err) { showToast("error", err.message); }
+    finally { $("#editChallengeModal").modal("hide"); }
   });
 
-  // DELETE Challenge
+  // 🔴 Delete Challenge
   $(document).on("click", ".deleteBtn", function () {
     deleteRow = $(this).closest("tr")[0];
+    deleteId = deleteRow.getAttribute("data-id");
     $("#deleteChallengeModal").modal("show");
   });
 
-  $("#confirmDelete").on("click", function () {
-    if (deleteRow) deleteRow.remove();
-    deleteRow = null;
-    $("#deleteChallengeModal").modal("hide");
+  $("#confirmDelete").on("click", async function () {
+    if (!deleteId) return;
+    try {
+      const res = await fetch(`/challenge/${deleteId}`, { method: "DELETE" });
+      const data = await res.json();
+      if (!res.ok) throw new Error(data.message);
+      deleteRow.remove();
+      showToast("success", data.message || "Challenge deleted!");
+    } catch (err) { showToast("error", err.message); }
+    finally { deleteRow = null; deleteId = null; $("#deleteChallengeModal").modal("hide"); }
   });
 </script>
