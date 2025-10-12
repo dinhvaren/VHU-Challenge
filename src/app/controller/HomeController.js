@@ -5,6 +5,7 @@ class HomeController {
     try {
       res.render("pages/index", {
         title: "VHU InfoSec Lab | Home",
+        currentPath: req.path,
         message: "Welcome to VHU CTF Platform",
       });
     } catch (err) {
@@ -21,6 +22,7 @@ class HomeController {
     try {
       res.render("pages/about", {
         title: "About | VHU InfoSec Lab",
+        currentPath: req.path,
         description:
           "VHU InfoSec Lab là môi trường học tập & CTF Platform dành cho sinh viên ngành An toàn thông tin tại Đại học Văn Hiến.",
       });
@@ -45,6 +47,7 @@ class HomeController {
         title: "Hackerboard | VHU InfoSec Lab",
         message: "Top 10 teams in the VHU CTF Platform.",
         teams,
+        currentPath: req.path,
       });
     } catch (err) {
       console.error("Hackerboard Error:", err);
@@ -64,6 +67,7 @@ class HomeController {
         title: "Challenges | VHU InfoSec Lab",
         message: "Select a challenge and start hacking!",
         challenges,
+        currentPath: req.path,
       });
     } catch (err) {
       console.error("Challenges Error:", err);
@@ -80,6 +84,7 @@ class HomeController {
       res.render("pages/feedback", {
         title: "Feedback | VHU InfoSec Lab",
         message: "Your feedback helps us improve the CTF experience.",
+        currentPath: req.path,
       });
     } catch (err) {
       console.error("Feedback Error:", err);

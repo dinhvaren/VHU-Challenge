@@ -1,0 +1,23 @@
+<nav class="navbar px-0 navbar-expand-lg navbar-dark">
+  <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavAltMarkup"
+    aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">
+    <span class="navbar-toggler-icon"></span>
+  </button>
+
+  <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
+    <div class="navbar-nav">
+      <a href="/" class="pl-md-0 p-3 text-decoration-none text-light">
+        <h3 class="bold"><span class="color_danger">VHU </span><span class="color_white">InfoSec Lab</span></h3>
+      </a>
+    </div>
+
+    <div class="navbar-nav ml-auto">
+      <a href="/" class="p-3 text-decoration-none {{navClass '/' currentPath}} bold">Home</a>
+      <a href="/about" class="p-3 text-decoration-none {{navClass '/about' currentPath}} bold">About</a>
+      <a href="/challenges" class="p-3 text-decoration-none {{navClass '/challenges' currentPath}} bold">Challenges</a>
+      <a href="/hackerboard" class="p-3 text-decoration-none {{navClass '/hackerboard' currentPath}} bold">Hackerboard</a>
+      <a href="/auth/login" class="p-3 text-decoration-none {{navClass '/auth/login' currentPath}} bold">Login</a>
+      <a href="/auth/register" class="p-3 text-decoration-none {{navClass '/auth/register' currentPath}} bold">Register</a>
+    </div>
+  </div>
+</nav>

@@ -12,8 +12,7 @@ app.use(cookieParser());
 app.use(express.urlencoded({ extended: true }));
 app.use(express.json());
 app.use("/image", express.static(path.join(__dirname, "..", "image")));
-app.use(express.static(path.join(__dirname, '..', 'public')));
-
+app.use(express.static(path.join(__dirname, "..", "public")));
 
 app.engine(
   "hbs",
@@ -21,6 +20,10 @@ app.engine(
     extname: ".hbs",
     helpers: {
       eq: (a, b) => a === b,
+      navClass: (link, currentPath) => {
+        if (link === currentPath) return "text-white";
+        return "text-light";
+      },
     },
     partialsDir: [
       path.join(__dirname, "views/partials"),
