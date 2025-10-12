@@ -17,10 +17,6 @@ sudo docker compose build --no-cache
 echo "🚀 Starting containers..."
 sudo docker compose up -d
 
-echo -e "📤 Copying seed files into container..."
-sudo docker cp seedProducts.js storelab_app:/app/seedProducts.js
-sudo docker cp seedUsers.js storelab_app:/app/seedUsers.js
-
 # --- Nginx config ---
 if [ ! -f /etc/nginx/sites-available/$APP_NAME ]; then
   echo "🌐 Setting up Nginx..."
