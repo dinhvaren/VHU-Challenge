@@ -34,7 +34,7 @@ class AuthController {
     }
   }
 
-  // [GET] /auth/register  → (Team registration page)
+  // [GET] /auth/register (team)
   showRegister(req, res) {
     try {
       res.render("auth/register", {
@@ -92,7 +92,7 @@ class AuthController {
     }
   }
 
-  // [POST] /auth/register
+  // [POST] /auth/register (team)
   async register(req, res) {
     try {
       const { teamName, members } = req.body;
@@ -190,6 +190,12 @@ class AuthController {
         { expiresIn: "2h" }
       );
 
+      res.cookie("auth_token", token, {
+        httpOnly: true,
+        secure: process.env.NODE_ENV === "production",
+        maxAge: 2 * 60 * 60 * 1000, // 2h
+      });
+
       return res.status(200).json({
         message: "Login successful!",
         token,
@@ -203,6 +209,33 @@ class AuthController {
     } catch (err) {
       console.error("Login Error:", err);
       res.status(500).json({ message: "Server error. Please try again later." });
+    }
+  }
+
+  // [GET] /auth/logout
+  logout(req, res) {
+    try {
+      res.clearCookie("auth_token");
+
+      if (req.session) {
+        req.session.destroy((err) => {
+          if (err) {
+            console.error("Session destroy error:", err);
+            return res.status(500).render("error/500", {
+              message: "Server error during logout.",
+            });
+          }
+
+          res.redirect("/auth/login");
+        });
+      } else {
+        res.redirect("/auth/login");
+      }
+    } catch (err) {
+      console.error("Logout Error:", err);
+      res.status(500).render("error/500", {
+        message: "Server error during logout.",
+      });
     }
   }
 }
