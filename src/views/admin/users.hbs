@@ -52,30 +52,24 @@
               </tr>
             </thead>
             <tbody class="hackerFont">
-              <tr>
-                <td>1</td>
-                <td>d1nhvar3n</td>
-                <td>d1nhvar3n@vhu.edu.vn</td>
-                <td>T001</td>
-                <td>Admin</td>
-                <td><span class="badge badge-success">Active</span></td>
+              {{#each users}}
+              <tr data-id="{{_id}}">
+                <td>{{@index}}</td>
+                <td>{{username}}</td>
+                <td>{{email}}</td>
+                <td>{{#if team}}{{team.name}}{{else}}—{{/if}}</td>
+                <td>{{role}}</td>
+                <td>
+                  <span class="badge {{#if (eq status 'active')}}badge-success{{else}}badge-warning{{/if}}">
+                    {{status}}
+                  </span>
+                </td>
                 <td>
                   <button class="btn btn-sm btn-outline-primary mr-1 editBtn"><i class="fas fa-edit"></i></button>
                   <button class="btn btn-sm btn-outline-danger deleteBtn"><i class="fas fa-trash"></i></button>
                 </td>
               </tr>
-              <tr>
-                <td>2</td>
-                <td>alice</td>
-                <td>alice@vhu.edu.vn</td>
-                <td>T002</td>
-                <td>User</td>
-                <td><span class="badge badge-warning">Pending</span></td>
-                <td>
-                  <button class="btn btn-sm btn-outline-primary mr-1 editBtn"><i class="fas fa-edit"></i></button>
-                  <button class="btn btn-sm btn-outline-danger deleteBtn"><i class="fas fa-trash"></i></button>
-                </td>
-              </tr>
+              {{/each}}
             </tbody>
           </table>
 
@@ -191,69 +185,112 @@
   <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
 
   <!-- Logic JS -->
-  <script>
-    const table = document.getElementById("userTable").getElementsByTagName("tbody")[0];
-    let deleteRow = null;
+<script>
+  const table = document.getElementById("userTable").getElementsByTagName("tbody")[0];
+  let deleteRow = null;
+  let deleteId = null;
 
-    // ADD USER
-    $("#saveAdd").on("click", function () {
-      const username = $("#addUsername").val();
-      const email = $("#addEmail").val();
-      const teamID = $("#addTeamID").val() || "—";
-      const role = $("#addRole").val();
+  // 🟢 ADD USER
+  $("#saveAdd").on("click", async function () {
+    const username = $("#addUsername").val().trim();
+    const email = $("#addEmail").val().trim();
+    const role = $("#addRole").val();
+    const teamID = $("#addTeamID").val().trim() || null;
 
-      if (!username || !email) return alert("Please fill in username and email.");
+    if (!username || !email) {
+      return alert("Please fill in username and email.");
+    }
 
-      const row = table.insertRow();
-      const index = table.rows.length;
-      row.innerHTML = `
-        <td>${index}</td>
-        <td>${username}</td>
-        <td>${email}</td>
-        <td>${teamID}</td>
-        <td>${role}</td>
-        <td><span class="badge badge-success">Active</span></td>
-        <td>
-          <button class="btn btn-sm btn-outline-primary mr-1 editBtn"><i class="fas fa-edit"></i></button>
-          <button class="btn btn-sm btn-outline-danger deleteBtn"><i class="fas fa-trash"></i></button>
-        </td>`;
+    try {
+      const res = await fetch("/user", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ username, email, role, teamID })
+      });
+
+      const data = await res.json();
+      if (!res.ok) throw new Error(data.message || "Failed to add user.");
+
+      alert(data.message || "User added successfully!");
+      window.location.reload();
+    } catch (err) {
+      console.error("Add User Error:", err);
+      alert("❌ " + err.message);
+    } finally {
       $("#addUserModal").modal("hide");
       $("#addUserForm")[0].reset();
-    });
+    }
+  });
 
-    // EDIT USER
-    $(document).on("click", ".editBtn", function () {
-      const row = $(this).closest("tr")[0];
-      const cells = row.children;
-      $("#editRowIndex").val(row.rowIndex - 1);
-      $("#editUsername").val(cells[1].innerText);
-      $("#editEmail").val(cells[2].innerText);
-      $("#editTeamID").val(cells[3].innerText);
-      $("#editRole").val(cells[4].innerText);
-      $("#editUserModal").modal("show");
-    });
+  // 🟡 EDIT USER
+  $(document).on("click", ".editBtn", function () {
+    const row = $(this).closest("tr")[0];
+    const id = row.getAttribute("data-id"); // lấy _id của user từ <tr data-id="">
+    $("#editRowIndex").val(id);
+    $("#editUsername").val(row.cells[1].innerText);
+    $("#editEmail").val(row.cells[2].innerText);
+    $("#editTeamID").val(row.cells[3].innerText);
+    $("#editRole").val(row.cells[4].innerText);
+    $("#editUserModal").modal("show");
+  });
 
-    $("#saveEdit").on("click", function () {
-      const idx = $("#editRowIndex").val();
-      const row = table.rows[idx];
-      row.cells[1].innerText = $("#editUsername").val();
-      row.cells[2].innerText = $("#editEmail").val();
-      row.cells[3].innerText = $("#editTeamID").val();
-      row.cells[4].innerText = $("#editRole").val();
+  $("#saveEdit").on("click", async function () {
+    const id = $("#editRowIndex").val();
+    const username = $("#editUsername").val().trim();
+    const email = $("#editEmail").val().trim();
+    const teamID = $("#editTeamID").val().trim();
+    const role = $("#editRole").val();
+
+    if (!id || !username || !email) {
+      return alert("Please fill in all required fields.");
+    }
+
+    try {
+      const res = await fetch(`/user/${id}`, {
+        method: "PUT",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ username, email, teamID, role })
+      });
+
+      const data = await res.json();
+      if (!res.ok) throw new Error(data.message || "Failed to update user.");
+
+      alert(data.message || "User updated successfully!");
+      window.location.reload();
+    } catch (err) {
+      console.error("Edit User Error:", err);
+      alert("❌ " + err.message);
+    } finally {
       $("#editUserModal").modal("hide");
-    });
+    }
+  });
 
-    // DELETE USER
-    $(document).on("click", ".deleteBtn", function () {
-      deleteRow = $(this).closest("tr")[0];
-      $("#deleteUserModal").modal("show");
-    });
+  // 🔴 DELETE USER
+  $(document).on("click", ".deleteBtn", function () {
+    const row = $(this).closest("tr")[0];
+    deleteRow = row;
+    deleteId = row.getAttribute("data-id");
+    $("#deleteUserModal").modal("show");
+  });
 
-    $("#confirmDelete").on("click", function () {
-      if (deleteRow) {
-        deleteRow.remove();
-        deleteRow = null;
-      }
+  $("#confirmDelete").on("click", async function () {
+    if (!deleteId) return;
+
+    try {
+      const res = await fetch(`/user/${deleteId}`, { method: "DELETE" });
+      const data = await res.json();
+
+      if (!res.ok) throw new Error(data.message || "Failed to delete user.");
+
+      deleteRow.remove();
+      alert(data.message || "User deleted successfully!");
+    } catch (err) {
+      console.error("Delete User Error:", err);
+      alert("❌ " + err.message);
+    } finally {
+      deleteRow = null;
+      deleteId = null;
       $("#deleteUserModal").modal("hide");
-    });
-  </script>
+    }
+  });
+</script>

@@ -19,12 +19,16 @@ app.engine(
   engine({
     extname: ".hbs",
     helpers: {
-      eq: (a, b) => a === b,
+      eq: (a, b) => {
+        if (!a || !b) return false;
+        return a.replace(/\/$/, "") === b.replace(/\/$/, "");
+      },
       navClass: (link, currentPath) => {
-        if (link === currentPath) return "text-white";
-        return "text-light";
+        if (!currentPath) return "text-light";
+        return link === currentPath ? "text-white" : "text-light";
       },
     },
+
     partialsDir: [
       path.join(__dirname, "views/partials"),
       path.join(__dirname, "views/pages"),
