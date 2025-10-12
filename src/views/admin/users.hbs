@@ -1,191 +1,231 @@
-  <div class="glitch">
-    <div class="glitch__img"></div>
-  </div>
+<div class="glitch">
+  <div class="glitch__img"></div>
+</div>
 
-  <!-- Navbar -->
-  <div class="navbar-dark text-white">
-    <div class="container">
-      <nav class="navbar px-0 navbar-expand-lg navbar-dark">
-        <a href="/admin" class="navbar-brand">
-          <h3><span class="color_danger">VHU</span><span class="color_white">Admin</span></h3>
-        </a>
-        <div class="navbar-nav ml-auto">
-          <a href="/admin" class="p-3 text-decoration-none text-light bold">Dashboard</a>
-          <a href="/hackerboard" class="p-3 text-decoration-none text-light bold">Hackerboard</a>
-          <a href="/auth/logout" class="p-3 text-decoration-none text-danger bold">Logout</a>
+<!-- Navbar -->
+<div class="navbar-dark text-white">
+  <div class="container">
+    <nav class="navbar px-0 navbar-expand-lg navbar-dark">
+      <a href="/admin" class="navbar-brand">
+        <h3><span class="color_danger">VHU</span><span class="color_white">Admin</span></h3>
+      </a>
+      <div class="navbar-nav ml-auto">
+        <a href="/admin" class="p-3 text-decoration-none text-light bold">Dashboard</a>
+        <a href="/hackerboard" class="p-3 text-decoration-none text-light bold">Hackerboard</a>
+        <a href="/auth/logout" class="p-3 text-decoration-none text-danger bold">Logout</a>
+      </div>
+    </nav>
+  </div>
+</div>
+
+<!-- Main content -->
+<div class="jumbotron bg-transparent mb-0 pt-3 radius-0">
+  <div class="container">
+    <div class="row">
+      <!-- Sidebar -->
+      <div class="col-md-3">
+        <h4 class="bold color_white mb-4">Admin Panel</h4>
+        <div class="list-group">
+          <a href="/admin" class="list-group-item list-group-item-action">Dashboard</a>
+          <a href="/admin/leaderboard" class="list-group-item list-group-item-action">Leaderboard</a>
+          <a href="/admin/users" class="list-group-item list-group-item-action active">Users</a>
+          <a href="/admin/teams" class="list-group-item list-group-item-action">Teams</a>
+          <a href="/admin/challenges" class="list-group-item list-group-item-action">Challenges</a>
+          <a href="/admin/submissions" class="list-group-item list-group-item-action">Submissions</a>
         </div>
-      </nav>
+      </div>
+
+      <!-- Main Table -->
+      <div class="col-md-9">
+        <h2 class="bold color_white mb-4">Manage Users</h2>
+
+        <table class="table table-hover table-striped text-light" id="userTable">
+          <thead class="thead-dark">
+            <tr>
+              <th>#</th>
+              <th>Username</th>
+              <th>Email</th>
+              <th>Team ID</th>
+              <th>Role</th>
+              <th>Status</th>
+              <th>Actions</th>
+            </tr>
+          </thead>
+          <tbody class="hackerFont">
+            {{#each users}}
+            <tr data-id="{{_id}}">
+              <td>{{@index}}</td>
+              <td>{{username}}</td>
+              <td>{{email}}</td>
+              <td>{{#if team}}{{team.name}}{{else}}—{{/if}}</td>
+              <td>{{role}}</td>
+              <td>
+                <span class="badge {{#if (eq status 'active')}}badge-success{{else}}badge-warning{{/if}}">
+                  {{status}}
+                </span>
+              </td>
+              <td>
+                <button class="btn btn-sm btn-outline-primary mr-1 editBtn"><i class="fas fa-edit"></i></button>
+                <button class="btn btn-sm btn-outline-danger deleteBtn"><i class="fas fa-trash"></i></button>
+              </td>
+            </tr>
+            {{/each}}
+          </tbody>
+        </table>
+
+        <button class="btn btn-outline-danger btn-shadow px-3 my-3" data-toggle="modal" data-target="#addUserModal">
+          <i class="fas fa-plus mr-2"></i>Add New User
+        </button>
+      </div>
     </div>
   </div>
+</div>
 
-  <!-- Main content -->
-  <div class="jumbotron bg-transparent mb-0 pt-3 radius-0">
-    <div class="container">
-      <div class="row">
-        <!-- Sidebar -->
-        <div class="col-md-3">
-          <h4 class="bold color_white mb-4">Admin Panel</h4>
-          <div class="list-group">
-            <a href="/admin" class="list-group-item list-group-item-action">Dashboard</a>
-            <a href="/admin/leaderboard" class="list-group-item list-group-item-action">Leaderboard</a>
-            <a href="/admin/users" class="list-group-item list-group-item-action active">Users</a>
-            <a href="/admin/teams" class="list-group-item list-group-item-action">Teams</a>
-            <a href="/admin/challenges" class="list-group-item list-group-item-action">Challenges</a>
-            <a href="/admin/submissions" class="list-group-item list-group-item-action">Submissions</a>
+<!-- 🟢 Add User Modal -->
+<div class="modal fade" id="addUserModal" tabindex="-1" role="dialog">
+  <div class="modal-dialog modal-dialog-centered">
+    <div class="modal-content bg-dark text-light border border-danger">
+      <div class="modal-header border-danger">
+        <h5 class="modal-title color_danger bold">➕ Add New User</h5>
+        <button type="button" class="close text-light" data-dismiss="modal"><span>&times;</span></button>
+      </div>
+      <div class="modal-body hackerFont">
+        <form id="addUserForm">
+          <div class="form-group">
+            <label>Username</label>
+            <input type="text" class="form-control bg-transparent text-light" id="addUsername" required>
           </div>
-        </div>
-
-        <!-- Main Table -->
-        <div class="col-md-9">
-          <h2 class="bold color_white mb-4">Manage Users</h2>
-
-          <table class="table table-hover table-striped text-light" id="userTable">
-            <thead class="thead-dark">
-              <tr>
-                <th>#</th>
-                <th>Username</th>
-                <th>Email</th>
-                <th>Team ID</th>
-                <th>Role</th>
-                <th>Status</th>
-                <th>Actions</th>
-              </tr>
-            </thead>
-            <tbody class="hackerFont">
-              {{#each users}}
-              <tr data-id="{{_id}}">
-                <td>{{@index}}</td>
-                <td>{{username}}</td>
-                <td>{{email}}</td>
-                <td>{{#if team}}{{team.name}}{{else}}—{{/if}}</td>
-                <td>{{role}}</td>
-                <td>
-                  <span class="badge {{#if (eq status 'active')}}badge-success{{else}}badge-warning{{/if}}">
-                    {{status}}
-                  </span>
-                </td>
-                <td>
-                  <button class="btn btn-sm btn-outline-primary mr-1 editBtn"><i class="fas fa-edit"></i></button>
-                  <button class="btn btn-sm btn-outline-danger deleteBtn"><i class="fas fa-trash"></i></button>
-                </td>
-              </tr>
-              {{/each}}
-            </tbody>
-          </table>
-
-          <button class="btn btn-outline-danger btn-shadow px-3 my-3" data-toggle="modal" data-target="#addUserModal">
-            <i class="fas fa-plus mr-2"></i>Add New User
-          </button>
-        </div>
+          <div class="form-group">
+            <label>Email</label>
+            <input type="email" class="form-control bg-transparent text-light" id="addEmail" required>
+          </div>
+          <div class="form-group">
+            <label>Team ID</label>
+            <input type="text" class="form-control bg-transparent text-light" id="addTeamID" placeholder="e.g., T001">
+          </div>
+          <div class="form-group">
+            <label>Role</label>
+            <select class="form-control bg-transparent text-light" id="addRole">
+              <option>User</option>
+              <option>Admin</option>
+            </select>
+          </div>
+        </form>
+      </div>
+      <div class="modal-footer border-danger">
+        <button class="btn btn-outline-light" data-dismiss="modal">Cancel</button>
+        <button class="btn btn-outline-danger" id="saveAdd">Add User</button>
       </div>
     </div>
   </div>
+</div>
 
-  <!-- 🟢 Add User Modal -->
-  <div class="modal fade" id="addUserModal" tabindex="-1" role="dialog">
-    <div class="modal-dialog modal-dialog-centered">
-      <div class="modal-content bg-dark text-light border border-danger">
-        <div class="modal-header border-danger">
-          <h5 class="modal-title color_danger bold">➕ Add New User</h5>
-          <button type="button" class="close text-light" data-dismiss="modal"><span>&times;</span></button>
-        </div>
-        <div class="modal-body hackerFont">
-          <form id="addUserForm">
-            <div class="form-group">
-              <label>Username</label>
-              <input type="text" class="form-control bg-transparent text-light" id="addUsername" required>
-            </div>
-            <div class="form-group">
-              <label>Email</label>
-              <input type="email" class="form-control bg-transparent text-light" id="addEmail" required>
-            </div>
-            <div class="form-group">
-              <label>Team ID</label>
-              <input type="text" class="form-control bg-transparent text-light" id="addTeamID" placeholder="e.g., T001">
-            </div>
-            <div class="form-group">
-              <label>Role</label>
-              <select class="form-control bg-transparent text-light" id="addRole">
-                <option>User</option>
-                <option>Admin</option>
-              </select>
-            </div>
-          </form>
-        </div>
-        <div class="modal-footer border-danger">
-          <button class="btn btn-outline-light" data-dismiss="modal">Cancel</button>
-          <button class="btn btn-outline-danger" id="saveAdd">Add User</button>
-        </div>
+<!-- 🟡 Edit User Modal -->
+<div class="modal fade" id="editUserModal" tabindex="-1" role="dialog">
+  <div class="modal-dialog modal-dialog-centered">
+    <div class="modal-content bg-dark text-light border border-warning">
+      <div class="modal-header border-warning">
+        <h5 class="modal-title color_danger bold">✏️ Edit User</h5>
+        <button type="button" class="close text-light" data-dismiss="modal"><span>&times;</span></button>
+      </div>
+      <div class="modal-body hackerFont">
+        <form id="editUserForm">
+          <input type="hidden" id="editRowIndex">
+          <div class="form-group">
+            <label>Username</label>
+            <input type="text" class="form-control bg-transparent text-light" id="editUsername" required>
+          </div>
+          <div class="form-group">
+            <label>Email</label>
+            <input type="email" class="form-control bg-transparent text-light" id="editEmail" required>
+          </div>
+          <div class="form-group">
+            <label>Team ID</label>
+            <input type="text" class="form-control bg-transparent text-light" id="editTeamID">
+          </div>
+          <div class="form-group">
+            <label>Role</label>
+            <select class="form-control bg-transparent text-light" id="editRole">
+              <option>User</option>
+              <option>Admin</option>
+            </select>
+          </div>
+        </form>
+      </div>
+      <div class="modal-footer border-warning">
+        <button class="btn btn-outline-light" data-dismiss="modal">Cancel</button>
+        <button class="btn btn-outline-warning" id="saveEdit">Save Changes</button>
       </div>
     </div>
   </div>
+</div>
 
-  <!-- 🟡 Edit User Modal -->
-  <div class="modal fade" id="editUserModal" tabindex="-1" role="dialog">
-    <div class="modal-dialog modal-dialog-centered">
-      <div class="modal-content bg-dark text-light border border-warning">
-        <div class="modal-header border-warning">
-          <h5 class="modal-title color_danger bold">✏️ Edit User</h5>
-          <button type="button" class="close text-light" data-dismiss="modal"><span>&times;</span></button>
-        </div>
-        <div class="modal-body hackerFont">
-          <form id="editUserForm">
-            <input type="hidden" id="editRowIndex">
-            <div class="form-group">
-              <label>Username</label>
-              <input type="text" class="form-control bg-transparent text-light" id="editUsername" required>
-            </div>
-            <div class="form-group">
-              <label>Email</label>
-              <input type="email" class="form-control bg-transparent text-light" id="editEmail" required>
-            </div>
-            <div class="form-group">
-              <label>Team ID</label>
-              <input type="text" class="form-control bg-transparent text-light" id="editTeamID">
-            </div>
-            <div class="form-group">
-              <label>Role</label>
-              <select class="form-control bg-transparent text-light" id="editRole">
-                <option>User</option>
-                <option>Admin</option>
-              </select>
-            </div>
-          </form>
-        </div>
-        <div class="modal-footer border-warning">
-          <button class="btn btn-outline-light" data-dismiss="modal">Cancel</button>
-          <button class="btn btn-outline-warning" id="saveEdit">Save Changes</button>
-        </div>
+<!-- 🔴 Delete Confirmation Modal -->
+<div class="modal fade" id="deleteUserModal" tabindex="-1" role="dialog">
+  <div class="modal-dialog modal-dialog-centered">
+    <div class="modal-content bg-dark text-light border border-danger">
+      <div class="modal-header border-danger">
+        <h5 class="modal-title color_danger bold">⚠️ Confirm Deletion</h5>
+        <button type="button" class="close text-light" data-dismiss="modal"><span>&times;</span></button>
+      </div>
+      <div class="modal-body hackerFont">
+        Are you sure you want to delete this user? This action cannot be undone.
+      </div>
+      <div class="modal-footer border-danger">
+        <button class="btn btn-outline-light" data-dismiss="modal">Cancel</button>
+        <button class="btn btn-outline-danger" id="confirmDelete">Delete</button>
       </div>
     </div>
   </div>
+</div>
 
-  <!-- 🔴 Delete Confirmation Modal -->
-  <div class="modal fade" id="deleteUserModal" tabindex="-1" role="dialog">
-    <div class="modal-dialog modal-dialog-centered">
-      <div class="modal-content bg-dark text-light border border-danger">
-        <div class="modal-header border-danger">
-          <h5 class="modal-title color_danger bold">⚠️ Confirm Deletion</h5>
-          <button type="button" class="close text-light" data-dismiss="modal"><span>&times;</span></button>
-        </div>
-        <div class="modal-body hackerFont">
-          Are you sure you want to delete this user? This action cannot be undone.
-        </div>
-        <div class="modal-footer border-danger">
-          <button class="btn btn-outline-light" data-dismiss="modal">Cancel</button>
-          <button class="btn btn-outline-danger" id="confirmDelete">Delete</button>
-        </div>
-      </div>
+<!-- 🔔 Toast Notification -->
+<div aria-live="polite" aria-atomic="true" style="position: fixed; top: 1rem; right: 1rem; z-index: 9999;">
+  <div id="toastMsg" class="toast bg-dark text-light border border-danger" data-delay="3000">
+    <div class="toast-header bg-danger text-white">
+      <strong class="mr-auto" id="toastTitle">Notification</strong>
+      <button type="button" class="ml-2 mb-1 close text-white" data-dismiss="toast">&times;</button>
     </div>
+    <div class="toast-body hackerFont" id="toastBody">Message goes here.</div>
   </div>
+</div>
 
-  <!-- JS -->
-  <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"></script>
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"></script>
-  <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
+<!-- JS -->
+<script src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
 
-  <!-- Logic JS -->
+<!-- Toast + Logic -->
 <script>
+  // 🟢 Global Toast Function
+  function showToast(type, message) {
+    const toast = $("#toastMsg");
+    const title = $("#toastTitle");
+    const body = $("#toastBody");
+
+    toast.removeClass("border-danger border-success border-warning");
+    $(".toast-header").removeClass("bg-danger bg-success bg-warning text-dark text-white");
+
+    if (type === "success") {
+      $(".toast-header").addClass("bg-success text-white");
+      toast.addClass("border-success");
+      title.text("✅ Success");
+    } else if (type === "error") {
+      $(".toast-header").addClass("bg-danger text-white");
+      toast.addClass("border-danger");
+      title.text("❌ Error");
+    } else if (type === "warning") {
+      $(".toast-header").addClass("bg-warning text-dark");
+      toast.addClass("border-warning");
+      title.text("⚠️ Warning");
+    }
+
+    body.text(message);
+    toast.toast({ delay: 3000 });
+    toast.toast("show");
+  }
+
+  // CRUD Logic
   const table = document.getElementById("userTable").getElementsByTagName("tbody")[0];
   let deleteRow = null;
   let deleteId = null;
@@ -197,9 +237,8 @@
     const role = $("#addRole").val();
     const teamID = $("#addTeamID").val().trim() || null;
 
-    if (!username || !email) {
-      return alert("Please fill in username and email.");
-    }
+    if (!username || !email)
+      return showToast("warning", "Please fill in username and email.");
 
     try {
       const res = await fetch("/user", {
@@ -211,11 +250,11 @@
       const data = await res.json();
       if (!res.ok) throw new Error(data.message || "Failed to add user.");
 
-      alert(data.message || "User added successfully!");
-      window.location.reload();
+      showToast("success", data.message || "User added successfully!");
+      setTimeout(() => window.location.reload(), 2000);
     } catch (err) {
       console.error("Add User Error:", err);
-      alert("❌ " + err.message);
+      showToast("error", err.message);
     } finally {
       $("#addUserModal").modal("hide");
       $("#addUserForm")[0].reset();
@@ -225,7 +264,7 @@
   // 🟡 EDIT USER
   $(document).on("click", ".editBtn", function () {
     const row = $(this).closest("tr")[0];
-    const id = row.getAttribute("data-id"); // lấy _id của user từ <tr data-id="">
+    const id = row.getAttribute("data-id");
     $("#editRowIndex").val(id);
     $("#editUsername").val(row.cells[1].innerText);
     $("#editEmail").val(row.cells[2].innerText);
@@ -241,9 +280,8 @@
     const teamID = $("#editTeamID").val().trim();
     const role = $("#editRole").val();
 
-    if (!id || !username || !email) {
-      return alert("Please fill in all required fields.");
-    }
+    if (!id || !username || !email)
+      return showToast("warning", "Please fill in all required fields.");
 
     try {
       const res = await fetch(`/user/${id}`, {
@@ -255,11 +293,11 @@
       const data = await res.json();
       if (!res.ok) throw new Error(data.message || "Failed to update user.");
 
-      alert(data.message || "User updated successfully!");
-      window.location.reload();
+      showToast("success", data.message || "User updated successfully!");
+      setTimeout(() => window.location.reload(), 2000);
     } catch (err) {
       console.error("Edit User Error:", err);
-      alert("❌ " + err.message);
+      showToast("error", err.message);
     } finally {
       $("#editUserModal").modal("hide");
     }
@@ -283,10 +321,10 @@
       if (!res.ok) throw new Error(data.message || "Failed to delete user.");
 
       deleteRow.remove();
-      alert(data.message || "User deleted successfully!");
+      showToast("success", data.message || "User deleted successfully!");
     } catch (err) {
       console.error("Delete User Error:", err);
-      alert("❌ " + err.message);
+      showToast("error", err.message);
     } finally {
       deleteRow = null;
       deleteId = null;
