@@ -1,4 +1,4 @@
-const { Team, User } = require("../models");
+const { Team, User } = require("../models/index");
 const crypto = require("crypto");
 
 class TeamController {

@@ -1,4 +1,4 @@
-const { User, Team, Challenge, Submission } = require("../models");
+const { User, Team, Challenge, Submission } = require("../models/index");
 
 class AdminController {
   // [GET] /admin/dashboard
@@ -101,10 +101,7 @@ class AdminController {
   // [GET] /admin/leaderboard
   async leaderboard(req, res) {
     try {
-      const teams = await Team.find()
-        .sort({ score: -1 })
-        .limit(20)
-        .lean();
+      const teams = await Team.find().sort({ score: -1 }).limit(20).lean();
 
       res.render("admin/leaderboard", {
         title: "Leaderboard | VHU InfoSec Lab",
@@ -112,7 +109,37 @@ class AdminController {
       });
     } catch (err) {
       console.error("Leaderboard Error:", err);
-      res.status(500).render("error/500", { message: "Failed to load leaderboard." });
+      res
+        .status(500)
+        .render("error/500", { message: "Failed to load leaderboard." });
+    }
+  }
+  // [GET] /admin/submissions
+  async listSubmissions(req, res) {
+    try {
+      const { user, team, result } = req.query;
+      const filter = {};
+      if (user) filter.user = user;
+      if (team) filter.team = team;
+      if (result === "correct") filter.isCorrect = true;
+      if (result === "wrong") filter.isCorrect = false;
+
+      const submissions = await Submission.find(filter)
+        .populate("user", "username")
+        .populate("team", "name")
+        .populate("challenge", "title category points")
+        .sort({ submittedAt: -1 })
+        .lean();
+
+      res.render("admin/submissions", {
+        title: "Manage Submissions | VHU InfoSec Lab",
+        submissions,
+      });
+    } catch (err) {
+      console.error("List Submissions Error:", err);
+      res
+        .status(500)
+        .render("error/500", { message: "Failed to load submissions." });
     }
   }
 }

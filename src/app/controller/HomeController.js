@@ -1,4 +1,4 @@
-const { Challenge, Team, User } = require("../models");
+const { Challenge, Team, User } = require("../models/index");
 class HomeController {
   // [GET] /
   async index(req, res, next) {

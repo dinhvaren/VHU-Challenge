@@ -1,0 +1,130 @@
+<div class="glitch">
+  <div class="glitch__img"></div>
+</div>
+
+<!-- Navbar -->
+<div class="navbar-dark text-white">
+  <div class="container">
+    <nav class="navbar px-0 navbar-expand-lg navbar-dark">
+      <a href="/admin" class="navbar-brand">
+        <h3><span class="color_danger">VHU</span><span class="color_white">Admin</span></h3>
+      </a>
+      <div class="navbar-nav ml-auto">
+        <a href="/admin" class="p-3 text-decoration-none text-light bold">Dashboard</a>
+        <a href="/hackerboard" class="p-3 text-decoration-none text-light bold">Hackerboard</a>
+        <a href="/auth/logout" class="p-3 text-decoration-none text-danger bold">Logout</a>
+      </div>
+    </nav>
+  </div>
+</div>
+
+<!-- Main -->
+<div class="jumbotron bg-transparent mb-0 pt-3 radius-0">
+  <div class="container">
+    <div class="row">
+      <!-- Sidebar -->
+      <div class="col-md-3">
+        <h4 class="bold color_white mb-4">Admin Panel</h4>
+        <div class="list-group">
+          <a href="/admin" class="list-group-item list-group-item-action">Dashboard</a>
+          <a href="/admin/users" class="list-group-item list-group-item-action">Users</a>
+          <a href="/admin/teams" class="list-group-item list-group-item-action">Teams</a>
+          <a href="/admin/challenges" class="list-group-item list-group-item-action">Challenges</a>
+          <a href="/admin/leaderboard" class="list-group-item list-group-item-action">Leaderboard</a>
+          <a href="/admin/submissions" class="list-group-item list-group-item-action active">Submissions</a>
+        </div>
+      </div>
+
+      <!-- Main Table -->
+      <div class="col-md-9">
+        <h2 class="bold color_white mb-4">Manage Submissions</h2>
+
+        <table class="table table-hover table-striped text-light" id="submissionTable">
+          <thead class="thead-dark">
+            <tr>
+              <th>#</th>
+              <th>User</th>
+              <th>Team</th>
+              <th>Challenge</th>
+              <th>Flag</th>
+              <th>Result</th>
+              <th>IP</th>
+              <th>Submitted At</th>
+              <th>Actions</th>
+            </tr>
+          </thead>
+          <tbody class="hackerFont">
+            <tr>
+              <td>1</td>
+              <td>d1nhvar3n</td>
+              <td>VHU_Elite</td>
+              <td>Hidden Message</td>
+              <td>vhuCTF{flag123}</td>
+              <td><span class="badge badge-success">Correct</span></td>
+              <td>192.168.1.10</td>
+              <td>2025-10-12 10:25</td>
+              <td>
+                <button class="btn btn-sm btn-outline-danger deleteBtn"><i class="fas fa-trash"></i></button>
+              </td>
+            </tr>
+            <tr>
+              <td>2</td>
+              <td>anonymous</td>
+              <td>Solo</td>
+              <td>SQL Injection</td>
+              <td>vhuCTF{wrongflag}</td>
+              <td><span class="badge badge-danger">Wrong</span></td>
+              <td>203.162.12.5</td>
+              <td>2025-10-12 11:02</td>
+              <td>
+                <button class="btn btn-sm btn-outline-danger deleteBtn"><i class="fas fa-trash"></i></button>
+              </td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- 🔴 Delete Confirmation Modal -->
+<div class="modal fade" id="deleteSubmissionModal" tabindex="-1" role="dialog">
+  <div class="modal-dialog modal-dialog-centered">
+    <div class="modal-content bg-dark text-light border border-danger">
+      <div class="modal-header border-danger">
+        <h5 class="modal-title color_danger bold">⚠️ Confirm Deletion</h5>
+        <button type="button" class="close text-light" data-dismiss="modal"><span>&times;</span></button>
+      </div>
+      <div class="modal-body hackerFont">
+        Are you sure you want to delete this submission? This action cannot be undone.
+      </div>
+      <div class="modal-footer border-danger">
+        <button class="btn btn-outline-light" data-dismiss="modal">Cancel</button>
+        <button class="btn btn-outline-danger" id="confirmDelete">Delete</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- JS -->
+<script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
+
+<!-- Logic -->
+<script>
+  const table = document.getElementById("submissionTable").getElementsByTagName("tbody")[0];
+  let deleteRow = null;
+
+  // DELETE Submission
+  $(document).on("click", ".deleteBtn", function () {
+    deleteRow = $(this).closest("tr")[0];
+    $("#deleteSubmissionModal").modal("show");
+  });
+
+  $("#confirmDelete").on("click", function () {
+    if (deleteRow) deleteRow.remove();
+    deleteRow = null;
+    $("#deleteSubmissionModal").modal("hide");
+  });
+</script>

@@ -8,5 +8,6 @@ router.get("/teams", AdminController.listTeams);
 router.get("/challenges", AdminController.listChallenges);
 router.post("/challenges", AdminController.addChallenge);
 router.get("/leaderboard", AdminController.leaderboard);
+router.get("/submissions", AdminController.listSubmissions);
 
 module.exports = router;
