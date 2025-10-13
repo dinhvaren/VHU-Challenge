@@ -1,0 +1,126 @@
+<div id="preloader"></div>
+
+<div id="main">
+  <!-- Glitch Background -->
+  <div class="glitch">
+    <div style="position: fixed;" class="glitch__img"></div>
+    <div style="position: fixed;" class="glitch__img"></div>
+    <div style="position: fixed;" class="glitch__img"></div>
+    <div style="position: fixed;" class="glitch__img"></div>
+    <div style="position: fixed;" class="glitch__img"></div>
+  </div>
+</div>
+
+<!-- Navbar -->
+<div class="navbar-dark text-white">
+  <div class="container">
+    {{> navbar}}
+  </div>
+</div>
+
+<!-- Profile Section -->
+<div class="jumbotron bg-transparent mb-0 pt-3 radius-0">
+  <div class="container hackerFont text-light">
+    <div class="row">
+      <div class="col-xl-8">
+        <h1 class="display-1 bold color_white content__title mb-4">PROFILE</h1>
+        <p class="text-grey text-spacey lead mb-4">
+          View your stats, rank and latest activity.
+        </p>
+      </div>
+    </div>
+
+    <!-- User Information -->
+    <div class="row mb-5">
+      <div class="col-md-6">
+        <table class="table table-borderless text-light">
+          <tbody>
+            <tr>
+              <th scope="row" style="width: 150px;">Username</th>
+              <td>d1nhvar3n</td>
+            </tr>
+            <tr>
+              <th>Email</th>
+              <td>d1nhvar3n@example.com</td>
+            </tr>
+            <tr>
+              <th>Team</th>
+              <td>VHU_Elite</td>
+            </tr>
+            <tr>
+              <th>Score</th>
+              <td>2540</td>
+            </tr>
+            <tr>
+              <th>Rank</th>
+              <td>#3</td>
+            </tr>
+            <tr>
+              <th>Last Login</th>
+              <td>2025-10-12 14:23</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+
+      <div class="col-md-6 d-flex align-items-center">
+        <blockquote class="blockquote text-light">
+          <p class="mb-0">"The quieter your mind, the louder the system speaks."</p>
+          <footer class="blockquote-footer text-muted">VHU CTF 2025</footer>
+        </blockquote>
+      </div>
+    </div>
+
+    <!-- Submissions History -->
+    <div class="row mb-4">
+      <div class="col-md-12">
+        <h3 class="color_danger bold mb-3">Recent Submissions</h3>
+        <table class="table table-hover table-striped text-light">
+          <thead class="thead-dark">
+            <tr>
+              <th>#</th>
+              <th>Challenge</th>
+              <th>Flag</th>
+              <th>Result</th>
+              <th>Time</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>1</td>
+              <td>Hidden Message</td>
+              <td>vhuCTF{flag123}</td>
+              <td><span class="badge badge-success">Correct</span></td>
+              <td>2025-10-12 10:25</td>
+            </tr>
+            <tr>
+              <td>2</td>
+              <td>SQL Injection</td>
+              <td>vhuCTF{wrongflag}</td>
+              <td><span class="badge badge-danger">Wrong</span></td>
+              <td>2025-10-11 22:41</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+
+    <!-- Logout Button -->
+    <div class="row">
+      <div class="col-md-12">
+        <button
+          class="btn btn-outline-danger btn-shadow px-3 my-2"
+          onclick="(function(){window.location.href='/auth/logout'})();"
+        >
+          <i class="fas fa-sign-out-alt mr-2"></i> Logout
+        </button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- JS -->
+<script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
+<script src="/js/preloader.js"></script>

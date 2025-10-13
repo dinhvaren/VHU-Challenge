@@ -94,6 +94,38 @@ class HomeController {
       });
     }
   }
+
+  //  [GET] /profile
+  async profile(req, res) {
+    try {
+      // const userId = req.user?._id;
+      // if (!userId) {
+      //   return res.redirect("/auth/login");
+      // }
+
+      // const user = await User.findById(userId)
+      //   .populate("team", "name score")
+      //   .select("-password");
+
+      // const submissions = await Submission.find({ user: userId })
+      //   .populate("challenge", "title category")
+      //   .sort({ createdAt: -1 })
+      //   .limit(10);
+
+      res.render("pages/profile", {
+        title: "Profile | VHU InfoSec Lab",
+        // user,
+        // submissions,
+        currentPath: req.path,
+      });
+    } catch (err) {
+      console.error("Profile Render Error:", err);
+      res.status(500).render("error/500", {
+        page: { title: "Server Error" },
+        message: "Server error while rendering profile page.",
+      });
+    }
+  }
 }
 
 module.exports = new HomeController();

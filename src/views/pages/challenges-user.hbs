@@ -1,305 +1,284 @@
-  <!-- Glitch bg -->
-  <div class="glitch">
-    <div class="glitch__img"></div>
-    <div class="glitch__img"></div>
-    <div class="glitch__img"></div>
-    <div class="glitch__img"></div>
-    <div class="glitch__img"></div>
+<!-- Glitch Background -->
+<div class="glitch">
+  <div class="glitch__img"></div>
+  <div class="glitch__img"></div>
+  <div class="glitch__img"></div>
+  <div class="glitch__img"></div>
+  <div class="glitch__img"></div>
+</div>
+
+<!-- Navbar -->
+<div class="navbar-dark text-white" style="position: relative; z-index: 10;">
+  <div class="container">
+    {{> navbar}}
   </div>
+</div>
 
-  <!-- Navbar -->
-  <div class="navbar-dark text-white">
-    <div class="container">
-      {{> navbar}}
-    </div>
-  </div>
-
-  <!-- Content -->
-  <div class="jumbotron bg-transparent mb-0 pt-3 radius-0">
-    <div class="container">
-      <div class="row">
-        <div class="col-xl-12">
-          <h1 class="display-4 bold color_white">Challenges</h1>
-          <p class="text-grey hackerFont lead mb-4">Chọn challenge theo danh mục, đọc mô tả và nộp flag trực tiếp.</p>
-        </div>
-      </div>
-
-      <!-- Filters -->
-      <div class="row align-items-center mb-4">
-        <div class="col-md-6">
-          <div class="btn-group" role="group" aria-label="Categories">
-            <button class="btn btn-outline-danger filter-btn active" data-cat="all">All</button>
-            <button class="btn btn-outline-danger filter-btn" data-cat="Web">Web</button>
-            <button class="btn btn-outline-danger filter-btn" data-cat="Crypto">Crypto</button>
-            <button class="btn btn-outline-danger filter-btn" data-cat="Forensics">Forensics</button>
-            <button class="btn btn-outline-danger filter-btn" data-cat="Pwn">Pwn</button>
-            <button class="btn btn-outline-danger filter-btn" data-cat="Misc">Misc</button>
-          </div>
-        </div>
-        <div class="col-md-6 mt-3 mt-md-0">
-          <div class="input-group">
-            <input id="searchInput" type="text" class="form-control bg-transparent text-light" placeholder="Search challenge...">
-            <div class="input-group-append">
-              <span class="input-group-text bg-transparent text-light border-left-0"><i class="fas fa-search"></i></span>
-            </div>
-          </div>
-        </div>
-      </div>
-
-      <!-- Challenges Grid -->
-      <div class="row" id="challengeGrid">
-        <!-- Card 1 -->
-        <div class="col-md-4 mb-4 challenge-card" data-name="SQL Injection" data-cat="Web" data-points="100" data-diff="Easy" data-solved="false" data-flag="FLAG{sql_demo}" data-desc="Tìm cách bypass login qua lỗ hổng SQL Injection cổ điển." data-attachments="">
-          <div class="card bg-transparent border border-light h-100">
-            <div class="card-body d-flex flex-column">
-              <h5 class="color_white mb-2">SQL Injection</h5>
-              <div class="mb-2">
-                <span class="badge badge-info">Web</span>
-                <span class="badge badge-light">100 pts</span>
-                <span class="badge badge-secondary">Easy</span>
-              </div>
-              <p class="text-grey flex-grow-1">Bypass xác thực bằng payload phù hợp.</p>
-              <div class="d-flex justify-content-between align-items-center">
-                <span class="badge badge-dark status-badge">Unsovled</span>
-                <button class="btn btn-outline-danger btn-sm openChallenge">Details</button>
-              </div>
-            </div>
-          </div>
-        </div>
-
-        <!-- Card 2 -->
-        <div class="col-md-4 mb-4 challenge-card" data-name="Hidden Message" data-cat="Crypto" data-points="150" data-diff="Medium" data-solved="false" data-flag="FLAG{crypto_demo}" data-desc="Thông điệp được mã hóa — hãy khôi phục plaintext để lấy flag." data-attachments="">
-          <div class="card bg-transparent border border-light h-100">
-            <div class="card-body d-flex flex-column">
-              <h5 class="color_white mb-2">Hidden Message</h5>
-              <div class="mb-2">
-                <span class="badge badge-info">Crypto</span>
-                <span class="badge badge-light">150 pts</span>
-                <span class="badge badge-secondary">Medium</span>
-              </div>
-              <p class="text-grey flex-grow-1">Giải mã ciphertext bằng kỹ thuật phù hợp.</p>
-              <div class="d-flex justify-content-between align-items-center">
-                <span class="badge badge-dark status-badge">Unsovled</span>
-                <button class="btn btn-outline-danger btn-sm openChallenge">Details</button>
-              </div>
-            </div>
-          </div>
-        </div>
-
-        <!-- Card 3 -->
-        <div class="col-md-4 mb-4 challenge-card" data-name="Packet Hunter" data-cat="Forensics" data-points="200" data-diff="Medium" data-solved="false" data-flag="FLAG{pcap_demo}" data-desc="Phân tích file PCAP để tìm thông tin quan trọng và trích xuất flag." data-attachments="">
-          <div class="card bg-transparent border border-light h-100">
-            <div class="card-body d-flex flex-column">
-              <h5 class="color_white mb-2">Packet Hunter</h5>
-              <div class="mb-2">
-                <span class="badge badge-info">Forensics</span>
-                <span class="badge badge-light">200 pts</span>
-                <span class="badge badge-secondary">Medium</span>
-              </div>
-              <p class="text-grey flex-grow-1">Đọc lưu lượng, ghép mảnh và tìm flag.</p>
-              <div class="d-flex justify-content-between align-items-center">
-                <span class="badge badge-dark status-badge">Unsovled</span>
-                <button class="btn btn-outline-danger btn-sm openChallenge">Details</button>
-              </div>
-            </div>
-          </div>
-        </div>
-
-        <!-- Card 4 -->
-        <div class="col-md-4 mb-4 challenge-card" data-name="Baby ROP" data-cat="Pwn" data-points="300" data-diff="Hard" data-solved="false" data-flag="FLAG{pwn_demo}" data-desc="Khai thác ROP cơ bản để chiếm quyền điều khiển luồng thực thi." data-attachments="">
-          <div class="card bg-transparent border border-light h-100">
-            <div class="card-body d-flex flex-column">
-              <h5 class="color_white mb-2">Baby ROP</h5>
-              <div class="mb-2">
-                <span class="badge badge-info">Pwn</span>
-                <span class="badge badge-light">300 pts</span>
-                <span class="badge badge-secondary">Hard</span>
-              </div>
-              <p class="text-grey flex-grow-1">Dựng chuỗi gadget phù hợp.</p>
-              <div class="d-flex justify-content-between align-items-center">
-                <span class="badge badge-dark status-badge">Unsovled</span>
-                <button class="btn btn-outline-danger btn-sm openChallenge">Details</button>
-              </div>
-            </div>
-          </div>
-        </div>
-
-        <!-- Card 5 -->
-        <div class="col-md-4 mb-4 challenge-card" data-name="Stego Shot" data-cat="Misc" data-points="100" data-diff="Easy" data-solved="false" data-flag="FLAG{stego_demo}" data-desc="Một bức ảnh tưởng chừng vô hại... xem metadata/LSB thử xem!" data-attachments="">
-          <div class="card bg-transparent border border-light h-100">
-            <div class="card-body d-flex flex-column">
-              <h5 class="color_white mb-2">Stego Shot</h5>
-              <div class="mb-2">
-                <span class="badge badge-info">Misc</span>
-                <span class="badge badge-light">100 pts</span>
-                <span class="badge badge-secondary">Easy</span>
-              </div>
-              <p class="text-grey flex-grow-1">Giải steganography cơ bản.</p>
-              <div class="d-flex justify-content-between align-items-center">
-                <span class="badge badge-dark status-badge">Unsovled</span>
-                <button class="btn btn-outline-danger btn-sm openChallenge">Details</button>
-              </div>
-            </div>
-          </div>
-        </div>
-
-        <!-- Card 6 -->
-        <div class="col-md-4 mb-4 challenge-card" data-name="RSA - Small e" data-cat="Crypto" data-points="250" data-diff="Medium" data-solved="false" data-flag="FLAG{rsa_demo}" data-desc="RSA với public exponent nhỏ — hãy thử broadcast/Hastad…" data-attachments="">
-          <div class="card bg-transparent border border-light h-100">
-            <div class="card-body d-flex flex-column">
-              <h5 class="color_white mb-2">RSA - Small e</h5>
-              <div class="mb-2">
-                <span class="badge badge-info">Crypto</span>
-                <span class="badge badge-light">250 pts</span>
-                <span class="badge badge-secondary">Medium</span>
-              </div>
-              <p class="text-grey flex-grow-1">Tấn công phù hợp với e nhỏ.</p>
-              <div class="d-flex justify-content-between align-items-center">
-                <span class="badge badge-dark status-badge">Unsovled</span>
-                <button class="btn btn-outline-danger btn-sm openChallenge">Details</button>
-              </div>
-            </div>
-          </div>
-        </div>
-
+<!-- Content -->
+<div class="jumbotron bg-transparent mb-0 pt-3 radius-0" style="position: relative; z-index: 10;">
+  <div class="container">
+    <!-- Title -->
+    <div class="row">
+      <div class="col-xl-8">
+        <h1 class="display-1 bold color_white content__title mb-3">CHALLENGES</h1>
+        <p class="text-grey hackerFont lead mb-4">
+          Chọn challenge theo danh mục, đọc mô tả và nộp flag trực tiếp.
+        </p>
       </div>
     </div>
-  </div>
 
-  <!-- Challenge Modal -->
-  <div class="modal fade" id="challengeModal" tabindex="-1" role="dialog" aria-hidden="true">
-    <div class="modal-dialog modal-dialog-centered modal-lg" role="document">
-      <div class="modal-content bg-dark text-light border border-danger">
-        <div class="modal-header border-danger">
-          <h5 class="modal-title color_white" id="modalTitle">Challenge</h5>
-          <button type="button" class="close text-light" data-dismiss="modal"><span>&times;</span></button>
+    <!-- Filters -->
+    <div class="row align-items-center mb-4">
+      <div class="col-md-6">
+        <div class="btn-group" role="group" aria-label="Categories">
+          <button class="btn btn-outline-danger filter-btn active" data-cat="all">All</button>
+          <button class="btn btn-outline-danger filter-btn" data-cat="Web">Web</button>
+          <button class="btn btn-outline-danger filter-btn" data-cat="Crypto">Crypto</button>
+          <button class="btn btn-outline-danger filter-btn" data-cat="Forensics">Forensics</button>
+          <button class="btn btn-outline-danger filter-btn" data-cat="Pwn">Pwn</button>
+          <button class="btn btn-outline-danger filter-btn" data-cat="Misc">Misc</button>
         </div>
-        <div class="modal-body hackerFont">
-          <div class="mb-2">
-            <span class="badge badge-info" id="modalCategory">Category</span>
-            <span class="badge badge-light" id="modalPoints">0 pts</span>
-            <span class="badge badge-secondary" id="modalDiff">Diff</span>
-            <span class="badge badge-dark" id="modalStatus">Unsovled</span>
+      </div>
+      <div class="col-md-6 mt-3 mt-md-0">
+        <div class="input-group">
+          <input
+            id="searchInput"
+            type="text"
+            class="form-control bg-transparent text-light"
+            placeholder="Search challenge..."
+          />
+          <div class="input-group-append">
+            <span class="input-group-text bg-transparent text-light border-left-0">
+              <i class="fas fa-search"></i>
+            </span>
           </div>
-          <p id="modalDesc" class="text-grey mb-3"></p>
-
-          <div id="modalAttachments" class="mb-3 d-none">
-            <h6 class="color_white mb-2">Attachments</h6>
-            <ul class="mb-0" id="attachmentsList"></ul>
-          </div>
-
-          <hr class="border-light">
-
-          <div class="form-group mb-1">
-            <label for="flagInput">Submit Flag</label>
-            <input type="text" id="flagInput" class="form-control bg-transparent text-light" placeholder="FLAG{...}">
-            <small class="form-text text-muted">Demo phía client. Khi triển khai thực tế, gửi flag lên server để chấm.</small>
-          </div>
-          <input type="hidden" id="expectedFlag">
         </div>
-        <div class="modal-footer border-danger">
-          <button class="btn btn-outline-light" data-dismiss="modal">Close</button>
-          <button class="btn btn-outline-danger" id="submitFlag">Submit</button>
+      </div>
+    </div>
+
+    <!-- Challenges Grid -->
+    <div class="row" id="challengeGrid">
+      <!-- Example Card -->
+      <div
+        class="col-md-4 mb-4 challenge-card"
+        data-name="SQL Injection"
+        data-cat="Web"
+        data-points="100"
+        data-diff="Easy"
+        data-solved="false"
+        data-flag="FLAG{sql_demo}"
+        data-desc="Tìm cách bypass login qua lỗ hổng SQL Injection cổ điển."
+        data-attachments=""
+      >
+        <div class="card bg-transparent border border-light h-100">
+          <div class="card-body d-flex flex-column">
+            <h5 class="color_white mb-2">SQL Injection</h5>
+            <div class="mb-2">
+              <span class="badge badge-info">Web</span>
+              <span class="badge badge-light">100 pts</span>
+              <span class="badge badge-secondary">Easy</span>
+            </div>
+            <p class="text-grey flex-grow-1">Bypass xác thực bằng payload phù hợp.</p>
+            <div class="d-flex justify-content-between align-items-center">
+              <span class="badge badge-dark status-badge">Unsolved</span>
+              <button class="btn btn-outline-danger btn-sm openChallenge">Details</button>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div
+        class="col-md-4 mb-4 challenge-card"
+        data-name="Hidden Message"
+        data-cat="Crypto"
+        data-points="150"
+        data-diff="Medium"
+        data-solved="false"
+        data-flag="FLAG{crypto_demo}"
+        data-desc="Thông điệp được mã hóa — hãy khôi phục plaintext để lấy flag."
+        data-attachments=""
+      >
+        <div class="card bg-transparent border border-light h-100">
+          <div class="card-body d-flex flex-column">
+            <h5 class="color_white mb-2">Hidden Message</h5>
+            <div class="mb-2">
+              <span class="badge badge-info">Crypto</span>
+              <span class="badge badge-light">150 pts</span>
+              <span class="badge badge-secondary">Medium</span>
+            </div>
+            <p class="text-grey flex-grow-1">Giải mã ciphertext bằng kỹ thuật phù hợp.</p>
+            <div class="d-flex justify-content-between align-items-center">
+              <span class="badge badge-dark status-badge">Unsolved</span>
+              <button class="btn btn-outline-danger btn-sm openChallenge">Details</button>
+            </div>
+          </div>
         </div>
       </div>
     </div>
   </div>
+</div>
 
-  <!-- JS -->
-  <script src="https://code.jquery.com/jquery-3.4.1.min.js" crossorigin="anonymous"></script>
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" crossorigin="anonymous"></script>
-  <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" crossorigin="anonymous"></script>
+<!-- Challenge Modal -->
+<div class="modal fade" id="challengeModal" tabindex="-1" role="dialog" aria-hidden="true">
+  <div class="modal-dialog modal-dialog-centered modal-lg" role="document">
+    <div class="modal-content bg-dark text-light border border-danger">
+      <div class="modal-header border-danger">
+        <h5 class="modal-title color_white" id="modalTitle">Challenge</h5>
+        <button type="button" class="close text-light" data-dismiss="modal"><span>&times;</span></button>
+      </div>
+      <div class="modal-body hackerFont">
+        <div class="mb-2">
+          <span class="badge badge-info" id="modalCategory">Category</span>
+          <span class="badge badge-light" id="modalPoints">0 pts</span>
+          <span class="badge badge-secondary" id="modalDiff">Diff</span>
+          <span class="badge badge-dark" id="modalStatus">Unsolved</span>
+        </div>
+        <p id="modalDesc" class="text-grey mb-3"></p>
 
-  <script>
-    // Toggle active for category filter
-    $(".filter-btn").on("click", function () {
-      $(".filter-btn").removeClass("active");
-      $(this).addClass("active");
-      filterChallenges();
-    });
+        <div id="modalAttachments" class="mb-3 d-none">
+          <h6 class="color_white mb-2">Attachments</h6>
+          <ul class="mb-0" id="attachmentsList"></ul>
+        </div>
 
-    // Search handler
-    $("#searchInput").on("input", filterChallenges);
+        <hr class="border-light" />
+        <div class="form-group mb-1">
+          <label for="flagInput">Submit Flag</label>
+          <input
+            type="text"
+            id="flagInput"
+            class="form-control bg-transparent text-light"
+            placeholder="FLAG{...}"
+          />
+          <small class="form-text text-muted">
+            Demo phía client. Khi triển khai thực tế, gửi flag lên server để chấm.
+          </small>
+        </div>
+        <input type="hidden" id="expectedFlag" />
+      </div>
+      <div class="modal-footer border-danger">
+        <button class="btn btn-outline-light" data-dismiss="modal">Close</button>
+        <button class="btn btn-outline-danger" id="submitFlag">Submit</button>
+      </div>
+    </div>
+  </div>
+</div>
 
-    function filterChallenges() {
-      const cat = $(".filter-btn.active").data("cat");
-      const q = ($("#searchInput").val() || "").toLowerCase();
+<!-- 🔔 Toast Notification -->
+<div
+  aria-live="polite"
+  aria-atomic="true"
+  style="position: fixed; top: 1rem; right: 1rem; z-index: 9999;"
+>
+  <div id="toastMsg" class="toast bg-dark text-light border border-danger" data-delay="3000">
+    <div class="toast-header bg-danger text-white">
+      <strong class="mr-auto" id="toastTitle">Notification</strong>
+      <button type="button" class="ml-2 mb-1 close text-white" data-dismiss="toast">&times;</button>
+    </div>
+    <div class="toast-body hackerFont" id="toastBody">Message goes here.</div>
+  </div>
+</div>
 
-      $("#challengeGrid .challenge-card").each(function () {
-        const name = ($(this).data("name") + "").toLowerCase();
-        const c = $(this).data("cat");
-        const matchCat = (cat === "all") || (c === cat);
-        const matchText = !q || name.includes(q);
-        $(this).toggle(matchCat && matchText);
-      });
+<!-- JS -->
+<script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
+
+<script>
+  // 🔹 Toast Function
+  function showToast(type, message) {
+    const toastTitle = $("#toastTitle");
+    const toastBody = $("#toastBody");
+    const toast = $("#toastMsg");
+
+    // Reset
+    toast.removeClass("border-danger border-success border-warning");
+    $(".toast-header").removeClass("bg-danger bg-success bg-warning");
+
+    // Style by type
+    if (type === "success") {
+      $(".toast-header").addClass("bg-success");
+      toast.addClass("border-success");
+      toastTitle.text("✅ Success");
+    } else if (type === "error") {
+      $(".toast-header").addClass("bg-danger");
+      toast.addClass("border-danger");
+      toastTitle.text("❌ Error");
+    } else {
+      $(".toast-header").addClass("bg-warning text-dark");
+      toast.addClass("border-warning");
+      toastTitle.text("⚠️ Notice");
     }
 
-    // Open modal with details
-    $(".openChallenge").on("click", function () {
-      const $card = $(this).closest(".challenge-card");
-      const name = $card.data("name");
-      const cat = $card.data("cat");
-      const pts = $card.data("points");
-      const diff = $card.data("diff");
-      const solved = ("" + $card.data("solved")) === "true";
-      const desc = $card.data("desc");
-      const flag = $card.data("flag");
-      const attachments = ($card.data("attachments") || "").toString().trim();
+    toastBody.text(message);
+    toast.toast("show");
+  }
 
-      $("#modalTitle").text(name);
-      $("#modalCategory").text(cat);
-      $("#modalPoints").text(pts + " pts");
-      $("#modalDiff").text(diff);
-      $("#modalStatus").text(solved ? "Solved" : "Unsolved")
-                       .removeClass("badge-dark badge-success")
-                       .addClass(solved ? "badge-success" : "badge-dark");
+  // 🔹 Filter Buttons
+  $(".filter-btn").on("click", function () {
+    $(".filter-btn").removeClass("active");
+    $(this).addClass("active");
+    filterChallenges();
+  });
 
-      $("#modalDesc").text(desc);
-      $("#expectedFlag").val(flag);
-      $("#flagInput").val("");
+  $("#searchInput").on("input", filterChallenges);
 
-      // Attachments list (comma-separated URLs)
-      if (attachments) {
-        const list = attachments.split(",").map(s => s.trim()).filter(Boolean);
-        $("#attachmentsList").empty();
-        list.forEach(url => {
-          const li = $("<li/>").append(
-            $("<a/>",{href:url,target:"_blank",text:url, class:"text-light"})
-          );
-          $("#attachmentsList").append(li);
-        });
-        $("#modalAttachments").removeClass("d-none");
-      } else {
-        $("#modalAttachments").addClass("d-none");
-        $("#attachmentsList").empty();
-      }
+  function filterChallenges() {
+    const cat = $(".filter-btn.active").data("cat");
+    const q = ($("#searchInput").val() || "").toLowerCase();
 
-      $("#challengeModal").modal("show");
+    $("#challengeGrid .challenge-card").each(function () {
+      const name = ($(this).data("name") + "").toLowerCase();
+      const c = $(this).data("cat");
+      const matchCat = cat === "all" || c === cat;
+      const matchText = !q || name.includes(q);
+      $(this).toggle(matchCat && matchText);
     });
+  }
 
-    // Submit flag (demo client-side)
-    $("#submitFlag").on("click", function () {
-      const userFlag = ($("#flagInput").val() || "").trim();
-      const expected = $("#expectedFlag").val();
+  // 🔹 Open Modal
+  $(".openChallenge").on("click", function () {
+    const $card = $(this).closest(".challenge-card");
+    $("#modalTitle").text($card.data("name"));
+    $("#modalCategory").text($card.data("cat"));
+    $("#modalPoints").text($card.data("points") + " pts");
+    $("#modalDiff").text($card.data("diff"));
+    $("#modalDesc").text($card.data("desc"));
+    $("#expectedFlag").val($card.data("flag"));
 
-      if (!userFlag) {
-        alert("Vui lòng nhập flag.");
-        return;
-      }
+    const solved = $card.data("solved") === true || $card.data("solved") === "true";
+    $("#modalStatus")
+      .text(solved ? "Solved" : "Unsolved")
+      .removeClass("badge-dark badge-success")
+      .addClass(solved ? "badge-success" : "badge-dark");
 
-      if (userFlag === expected) {
-        // Mark card as solved
-        const title = $("#modalTitle").text();
-        const $card = $("#challengeGrid .challenge-card").filter(function () {
-          return $(this).data("name") === title;
-        });
-        $card.attr("data-solved", "true");
-        $card.find(".status-badge").removeClass("badge-dark").addClass("badge-success").text("Solved");
+    $("#challengeModal").modal("show");
+  });
 
-        alert("Chính xác! Flag hợp lệ 🎉");
-        $("#challengeModal").modal("hide");
-      } else {
-        alert("Sai flag rồi! Thử lại nhé.");
-      }
-    });
-  </script>
+  // 🔹 Submit Flag (Client demo)
+  $("#submitFlag").on("click", function () {
+    const userFlag = ($("#flagInput").val() || "").trim();
+    const expected = $("#expectedFlag").val();
+
+    if (!userFlag) {
+      showToast("warning", "⚠️ Vui lòng nhập flag!");
+      return;
+    }
+
+    if (userFlag === expected) {
+      const title = $("#modalTitle").text();
+      const $card = $("#challengeGrid .challenge-card").filter(
+        (_, el) => $(el).data("name") === title
+      );
+      $card.data("solved", "true");
+      $card.find(".status-badge")
+        .removeClass("badge-dark")
+        .addClass("badge-success")
+        .text("Solved");
+
+      showToast("success", "🎉 Chính xác! Flag hợp lệ.");
+      $("#challengeModal").modal("hide");
+    } else {
+      showToast("error", "❌ Sai flag rồi! Thử lại nhé.");
+    }
+  });
+</script>

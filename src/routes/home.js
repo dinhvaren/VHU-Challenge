@@ -7,5 +7,6 @@ router.get("/about", HomeController.about);
 router.get("/challenges", HomeController.challenges);
 router.get("/hackerboard", HomeController.hackerboard);
 router.get("/feedback", HomeController.feedback);
+router.get("/profile", HomeController.profile);
 
 module.exports = router;

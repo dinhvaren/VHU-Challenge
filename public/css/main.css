@@ -280,6 +280,7 @@ input[type="radio"].toggle:checked + label {
 }
 
 .content__title {
+  letter-spacing: 1.5px;
   color: #00ffff !important;
   animation: glitch-anim-text 3s infinite ease-in-out;
   text-shadow: 0 0 10px #00ffff, 0 0 20px #00ffff,
