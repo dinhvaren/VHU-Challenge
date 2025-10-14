@@ -14,7 +14,7 @@
 <!-- Navbar -->
 <div class="navbar-dark text-white">
   <div class="container">
-    {{> navbar}}
+    {{> navbar-auth}}
   </div>
 </div>
 
@@ -24,7 +24,7 @@
     <div class="row">
       <div class="col-xl-8">
         <h1 class="display-1 bold color_white content__title mb-4">PROFILE</h1>
-        <p class="text-grey text-spacey lead mb-4">
+        <p class="text-grey hackerFont lead mb-4">
           View your stats, rank and latest activity.
         </p>
       </div>
@@ -62,13 +62,6 @@
           </tbody>
         </table>
       </div>
-
-      <div class="col-md-6 d-flex align-items-center">
-        <blockquote class="blockquote text-light">
-          <p class="mb-0">"The quieter your mind, the louder the system speaks."</p>
-          <footer class="blockquote-footer text-muted">VHU CTF 2025</footer>
-        </blockquote>
-      </div>
     </div>
 
     <!-- Submissions History -->
@@ -104,19 +97,6 @@
         </table>
       </div>
     </div>
-
-    <!-- Logout Button -->
-    <div class="row">
-      <div class="col-md-12">
-        <button
-          class="btn btn-outline-danger btn-shadow px-3 my-2"
-          onclick="(function(){window.location.href='/auth/logout'})();"
-        >
-          <i class="fas fa-sign-out-alt mr-2"></i> Logout
-        </button>
-      </div>
-    </div>
-  </div>
 </div>
 
 <!-- JS -->
